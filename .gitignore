@@ -1,0 +1,17 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+.next/
+node_modules/
+tmp/
+*.tsbuildinfo
+*.log
+
+# Source/reference material that is not required by the website runtime.
+CSR/
+LOGOS/
+Reference/
+SoniTransferBlog.docx
+audit-homepage/
+soni-transfer-website-deploy.zip

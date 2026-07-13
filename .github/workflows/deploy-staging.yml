@@ -1,0 +1,71 @@
+name: Deploy staging
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: soni-transfer-staging
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    if: vars.STAGING_DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      REMITEC_API_BASE_URL: https://app.sonitransfer.com/api
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Configure staging SSH access
+        env:
+          STAGING_SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
+          STAGING_KNOWN_HOSTS: ${{ secrets.STAGING_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$STAGING_SSH_KEY" > ~/.ssh/soni-staging
+          chmod 600 ~/.ssh/soni-staging
+          printf '%s\n' "$STAGING_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Upload release source
+        env:
+          STAGING_HOST: ${{ secrets.STAGING_HOST }}
+          STAGING_USER: ${{ secrets.STAGING_USER }}
+        run: |
+          release_path="deployments/sonitransfer/releases/${GITHUB_SHA}"
+          ssh -i ~/.ssh/soni-staging "$STAGING_USER@$STAGING_HOST" "mkdir -p ~/$release_path"
+          rsync -az --delete \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='.next/' \
+            --exclude='node_modules/' \
+            -e 'ssh -i ~/.ssh/soni-staging' \
+            ./ "$STAGING_USER@$STAGING_HOST:~/$release_path/"
+
+      - name: Activate release
+        env:
+          STAGING_HOST: ${{ secrets.STAGING_HOST }}
+          STAGING_USER: ${{ secrets.STAGING_USER }}
+        run: |
+          ssh -i ~/.ssh/soni-staging "$STAGING_USER@$STAGING_HOST" \
+            "bash -s -- '$GITHUB_SHA'" < scripts/deploy-staging.sh
