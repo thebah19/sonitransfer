@@ -2,10 +2,9 @@
 .env
 .env.*
 !.env.example
-.next/
+dist/
 node_modules/
 tmp/
-*.tsbuildinfo
 *.log
 
 # Source/reference material that is not required by the website runtime.

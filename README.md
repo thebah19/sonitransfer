@@ -1,61 +1,43 @@
-# Soni Transfer Website
+# Soni Transfer V2 Review
 
-Next.js App Router website for Soni Transfer.
+Production-built Vite/React review site containing all three approved homepage
+concepts.
 
-## Deployment
+## Review routes
 
-1. Install dependencies:
+- `#/1` — Bold blue (default)
+- `#/2` — White editorial
+- `#/3` — Selected split
 
-```bash
-npm install
-```
+The deployed review is available under `/v2/`. The Vite base path must therefore
+be set when creating the deployment bundle.
 
-2. Configure environment variables on the hosting platform:
-
-```bash
-REMITEC_API_BASE_URL=https://app.sonitransfer.com/api
-```
-
-3. Build the site:
+## Local development
 
 ```bash
-npm run build
+npm ci
+npm run dev
 ```
 
-4. Start the production server:
+## Production validation
 
 ```bash
-npm run start
+npm ci
+VITE_BASE_PATH=/v2/ npm run build
+npm run test:sites
 ```
 
-The Remitec calculator uses server-side API routes under `/api/remitec/*`, so the deployment server must be able to resolve and reach the Remitec API host.
+The static Apache deployment uses `dist/client/`. Its configuration is tracked
+in `deploy/stagging.sonitransfer.com.conf`.
 
 ## Staging deployment
 
-Pushes to `main` are deployed to `https://stagging.sonitransfer.com/` by `.github/workflows/deploy-staging.yml`.
-
-The workflow:
-
-1. Installs dependencies and validates the production build on GitHub Actions.
-2. Uploads the source to an isolated release directory on the staging server.
-3. Builds the release on the server.
-4. Moves the previous release to a rollback directory.
-5. Restarts `soni-staging-next.service` and checks `http://127.0.0.1:3001/en`.
-6. Restores the previous release if activation or the health check fails.
-
-Required GitHub Actions secrets:
-
-- `STAGING_HOST`
-- `STAGING_USER`
-- `STAGING_SSH_KEY`
-- `STAGING_KNOWN_HOSTS`
-
-The repository variable `STAGING_DEPLOY_ENABLED` must be set to `true`. Keep it set to `false` while server access or service permissions are being changed.
-
-The deployment user requires passwordless permission for this command only:
+Pushes to `V2` deploy the static build to:
 
 ```text
-/bin/systemctl restart soni-staging-next.service
+https://stagging.sonitransfer.com/v2/
 ```
 
-Rollback is automatic when activation fails. A manual rollback can be performed by moving the desired backup from `~/deployments/sonitransfer/backups/` into `/var/www/stagging-soni-transfer-com` and restarting the service.
+The workflow requires the existing `STAGING_HOST`, `STAGING_USER`,
+`STAGING_SSH_KEY`, and `STAGING_KNOWN_HOSTS` secrets. The repository variable
+`STAGING_DEPLOY_ENABLED` must be `true`.
