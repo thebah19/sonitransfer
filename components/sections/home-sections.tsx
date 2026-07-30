@@ -8,8 +8,6 @@ import {
   ArrowRight,
   CheckCircle2,
   ChevronDown,
-  Clock3,
-  CreditCard,
   Globe2,
   Landmark,
   Loader2,
@@ -86,24 +84,24 @@ export function HomeSections({ locale = 'en' }: { locale?: Locale }) {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-soni-hero">
-        <div className="container-custom relative grid gap-8 py-10 md:py-12 lg:grid-cols-[0.68fr_1.32fr] lg:items-center lg:py-14">
-          <motion.div {...fadeUp} className="max-w-3xl">
-            <p className="mb-3 text-sm font-bold text-gold">Transfers to The Gambia</p>
-            <h1 className="max-w-xl text-4xl font-black leading-[1.04] tracking-normal text-navy sm:text-5xl lg:text-[3.5rem]">
+      <section className="relative overflow-hidden bg-navy">
+        <div className="container-custom relative grid gap-10 py-12 sm:py-16 lg:min-h-[660px] lg:grid-cols-[minmax(0,1fr)_minmax(420px,500px)] lg:items-center lg:gap-16 lg:py-14 xl:gap-24">
+          <motion.div {...fadeUp} className="max-w-[590px]">
+            <p className="mb-5 text-sm font-black uppercase tracking-[0.16em] text-orange-200">Soni Transfer</p>
+            <h1 className="text-5xl font-black leading-[0.98] tracking-[-0.055em] text-white sm:text-6xl lg:text-[4.6rem]">
               {home.heroTitle}
             </h1>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
+            <p className="mt-7 max-w-lg text-lg font-semibold leading-relaxed text-white/85 sm:text-xl">
               {home.heroCopy}
             </p>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 34, rotate: 1 }}
-            whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+            initial={{ opacity: 0, x: 28 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="relative min-w-0"
+            className="relative min-w-0"
           >
             <TransactionCard locale={locale} />
           </motion.div>
@@ -155,7 +153,7 @@ export function HomeSections({ locale = 'en' }: { locale?: Locale }) {
 
       <AppShowcase locale={locale} />
 
-      <section className="overflow-hidden bg-navy py-12 text-white md:py-16">
+      <section id="ways-to-receive" className="scroll-mt-20 overflow-hidden bg-navy py-12 text-white md:py-16">
         <div className="container-custom grid gap-7 lg:grid-cols-[0.76fr_1.24fr] lg:items-center">
           <motion.div {...fadeUp}>
             <p className="font-bold text-gold">Payout methods</p>
@@ -283,7 +281,7 @@ function TransactionCard({ locale }: { locale: Locale }) {
     retry: 1
   });
 
-  const fromCurrencies = fromCurrenciesQuery.data ?? [];
+  const fromCurrencies = useMemo(() => fromCurrenciesQuery.data ?? [], [fromCurrenciesQuery.data]);
   const selectedFrom = useMemo(
     () => fromCurrencies.find((currency) => currencyFromKey(currency) === fromKey) ?? fromCurrencies[0],
     [fromCurrencies, fromKey]
@@ -301,7 +299,7 @@ function TransactionCard({ locale }: { locale: Locale }) {
     retry: 1
   });
 
-  const toCurrencies = toCurrenciesQuery.data ?? [];
+  const toCurrencies = useMemo(() => toCurrenciesQuery.data ?? [], [toCurrenciesQuery.data]);
   const selectedTo = useMemo(
     () => toCurrencies.find((currency) => currencyToKey(currency) === toKey) ?? toCurrencies[0],
     [toCurrencies, toKey]
@@ -314,7 +312,7 @@ function TransactionCard({ locale }: { locale: Locale }) {
     retry: 1
   });
 
-  const deliveryMethods = deliveryMethodsQuery.data ?? [];
+  const deliveryMethods = useMemo(() => deliveryMethodsQuery.data ?? [], [deliveryMethodsQuery.data]);
   const preferredDelivery = useMemo(
     () =>
       deliveryMethods.find((method) => /cash\s*pick/i.test(method.Name)) ??
@@ -374,132 +372,128 @@ function TransactionCard({ locale }: { locale: Locale }) {
     fromCurrenciesQuery.isError || toCurrenciesQuery.isError || deliveryMethodsQuery.isError || quotationQuery.isError;
 
   return (
-    <Card className="relative mx-auto w-full max-w-[620px] overflow-hidden rounded-2xl border-slate-200 bg-white p-4 shadow-lg shadow-navy/10 sm:p-5">
-      <div className="relative">
-        <div className="flex items-center justify-between">
-          <div>
-            {labels.eyebrow ? <p className="text-sm font-bold text-gold">{labels.eyebrow}</p> : null}
-            <h2 className="text-xl font-black text-navy sm:text-2xl">{labels.title}</h2>
-          </div>
-          <span className="grid h-10 w-10 place-items-center rounded-2xl bg-blue-50 text-navy">
-            {isLoading ? <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" /> : <CreditCard className="h-5 w-5" aria-hidden="true" />}
-          </span>
-        </div>
-
-        <div className="mt-4 grid gap-3">
-          <div className="grid gap-3 md:grid-cols-2">
-            <label className="grid gap-2">
-              <span className="text-sm font-semibold text-slate-500">{labels.sendingFrom}</span>
-              <select
-                aria-label="Sending country"
-                value={fromKey}
-                disabled={!fromCurrencies.length}
-                onChange={(event) => {
-                  setFromKey(event.target.value);
-                  setToKey('');
-                  setDeliveryId('');
-                }}
-                className="min-h-11 rounded-2xl border border-slate-200 bg-white px-4 text-sm font-black text-navy outline-none transition focus:border-gold focus:ring-4 focus:ring-gold/20"
-              >
-                {fromCurrencies.length ? (
-                  fromCurrencies.map((currencyItem) => (
-                    <option key={currencyFromKey(currencyItem)} value={currencyFromKey(currencyItem)}>
-                      {currencyItem.CountryName} ({currencyItem.CurrencyInitial})
-                    </option>
-                  ))
-                ) : (
-                  <option>{fromCurrenciesQuery.isError ? labels.countriesUnavailable : labels.loadingCountries}</option>
-                )}
-              </select>
-            </label>
-
-            <label className="grid gap-2">
-              <span className="text-sm font-semibold text-slate-500">{labels.deliveryMethod}</span>
-              <select
-                aria-label="Delivery method"
-                value={deliveryId}
-                disabled={!deliveryMethods.length}
-                onChange={(event) => setDeliveryId(event.target.value)}
-                className="min-h-11 rounded-2xl border border-slate-200 bg-white px-4 text-sm font-black text-navy outline-none transition focus:border-gold focus:ring-4 focus:ring-gold/20"
-              >
-                {deliveryMethods.length ? (
-                  deliveryMethods.map((method) => (
-                    <option key={method.DeliveryTypeId} value={String(method.DeliveryTypeId)}>
-                      {method.Name}
-                    </option>
-                  ))
-                ) : (
-                  <option>{deliveryMethodsQuery.isError ? labels.methodsUnavailable : labels.loadingMethods}</option>
-                )}
-              </select>
-            </label>
-          </div>
-
-          <div className="grid items-center gap-2 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
-            <label className="min-w-0 rounded-2xl border border-slate-200 bg-white p-3 transition focus-within:border-navy/35 focus-within:ring-4 focus-within:ring-navy/10">
-              <span className="text-sm font-semibold text-slate-500">{labels.youSend}</span>
-              <div className="mt-1 flex items-center justify-between gap-3">
-                <input
-                  type="number"
-                  min={0}
-                  inputMode="decimal"
-                  aria-label="Amount you send"
-                  value={sendAmount}
-                  onChange={(event) => setSendAmount(event.target.value)}
-                  className="min-w-0 flex-1 border-0 bg-transparent text-2xl font-black text-ink outline-none"
-                />
-                <span className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-black text-navy">
-                  {selectedFrom?.CurrencyInitial ?? '---'}
-                </span>
-              </div>
-            </label>
-            <div className="mx-auto -my-1 grid h-8 w-8 place-items-center rounded-full bg-orange-50 text-gold md:my-0">
-              <ArrowRight className="h-4 w-4 rotate-90 md:rotate-0" aria-hidden="true" />
-            </div>
-            <div className="min-w-0 rounded-2xl border border-gold/30 bg-orange-50/60 p-3">
-              <p className="text-sm font-semibold text-slate-500">{labels.theyReceive}</p>
-              <div className="mt-1 flex items-center justify-between gap-3">
-                <p className="min-w-0 truncate text-2xl font-black text-ink">{hasLiveRate ? amountFormatter.format(receiveValue) : labels.loading}</p>
-                <span className="rounded-xl bg-white px-3 py-2 text-sm font-black text-navy shadow-sm ring-1 ring-slate-200">
-                  {selectedTo?.CurrencyInitial ?? 'GMD'}
-                </span>
-              </div>
-            </div>
+    <Card className="relative mx-auto w-full max-w-[500px] overflow-hidden rounded-[1.75rem] border-white/50 bg-white shadow-[0_28px_80px_rgba(8,26,71,0.28)]">
+      <div className="p-5 sm:p-7">
+        <div className="flex justify-end">
+          <div className="inline-flex min-h-9 items-center gap-2 rounded-full bg-slate-100 px-3.5 text-xs font-black text-navy">
+            {isLoading ? <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden="true" /> : <LockKeyhole className="h-3.5 w-3.5" aria-hidden="true" />}
+            {hasLiveRate
+              ? `1 ${selectedFrom?.CurrencyInitial} = ${rateFormatter.format(rate)} ${selectedTo?.CurrencyInitial ?? 'GMD'}`
+              : quotationQuery.isLoading
+                ? labels.loadingRate
+                : labels.rateUnavailable}
           </div>
         </div>
 
-        <dl className="mt-4 grid gap-2 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-sm">
-          <div className="flex items-center justify-between gap-4">
-            <dt className="text-slate-500">{labels.fee}</dt>
-            <dd className="font-black text-navy">
-              {amountFormatter.format(fee)} {selectedFrom?.CurrencyInitial ?? ''}
-            </dd>
+        <div className="mt-5 border-b border-slate-200 pb-5">
+          <label htmlFor="home-send-amount" className="text-sm font-black text-navy">{labels.youSend}</label>
+          <div className="mt-2 flex items-center gap-3">
+            <select
+              aria-label={labels.sendingFrom}
+              value={fromKey}
+              disabled={!fromCurrencies.length}
+              onChange={(event) => {
+                setFromKey(event.target.value);
+                setToKey('');
+                setDeliveryId('');
+              }}
+              className="min-h-11 max-w-[145px] rounded-full border border-slate-200 bg-slate-50 py-2 pl-3 pr-10 text-sm font-black text-navy outline-none transition focus:border-gold focus:ring-4 focus:ring-gold/20 sm:max-w-[185px]"
+            >
+              {fromCurrencies.length ? (
+                fromCurrencies.map((currencyItem) => (
+                  <option key={currencyFromKey(currencyItem)} value={currencyFromKey(currencyItem)}>
+                    {currencyItem.CountryName} · {currencyItem.CurrencyInitial}
+                  </option>
+                ))
+              ) : (
+                <option>{fromCurrenciesQuery.isError ? labels.countriesUnavailable : labels.loadingCountries}</option>
+              )}
+            </select>
+            <input
+              id="home-send-amount"
+              type="number"
+              min={0}
+              inputMode="decimal"
+              value={sendAmount}
+              onChange={(event) => setSendAmount(event.target.value)}
+              className="min-w-0 flex-1 border-0 bg-transparent text-right text-[2rem] font-black tracking-[-0.04em] text-navy outline-none sm:text-5xl"
+            />
           </div>
-          <div className="flex items-center justify-between gap-4">
-            <dt className="text-slate-500">{labels.rate}</dt>
-            <dd className="font-black text-navy">
-              {hasLiveRate
-                ? `1 ${selectedFrom?.CurrencyInitial} = ${rateFormatter.format(rate)} ${selectedTo?.CurrencyInitial ?? 'GMD'}`
-                : quotationQuery.isLoading
-                  ? labels.loadingRate
-                  : labels.rateUnavailable}
-            </dd>
+        </div>
+
+        <div className="border-b border-slate-200 py-5">
+          <p className="text-sm font-black text-navy">{labels.theyReceive}</p>
+          <div className="mt-2 flex items-center gap-3">
+            <select
+              aria-label="Receiving currency"
+              value={toKey}
+              disabled={!toCurrencies.length}
+              onChange={(event) => {
+                setToKey(event.target.value);
+                setDeliveryId('');
+              }}
+              className="min-h-11 max-w-[145px] rounded-full border border-slate-200 bg-slate-50 py-2 pl-3 pr-10 text-sm font-black text-navy outline-none transition focus:border-gold focus:ring-4 focus:ring-gold/20 sm:max-w-[185px]"
+            >
+              {toCurrencies.length ? (
+                toCurrencies.map((currencyItem) => (
+                  <option key={currencyToKey(currencyItem)} value={currencyToKey(currencyItem)}>
+                    {currencyItem.CountryName} · {currencyItem.CurrencyInitial}
+                  </option>
+                ))
+              ) : (
+                <option>{labels.loading}</option>
+              )}
+            </select>
+            <p className="min-w-0 flex-1 truncate text-right text-[2rem] font-black tracking-[-0.04em] text-navy sm:text-5xl">
+              {hasLiveRate ? amountFormatter.format(receiveValue) : '—'}
+            </p>
           </div>
+        </div>
+
+        <label className="block border-b border-slate-200 py-5">
+          <span className="text-sm font-black text-navy">{labels.deliveryMethod}</span>
+          <select
+            aria-label={labels.deliveryMethod}
+            value={deliveryId}
+            disabled={!deliveryMethods.length}
+            onChange={(event) => setDeliveryId(event.target.value)}
+            className="mt-2 min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-sm font-black text-navy outline-none transition focus:border-gold focus:ring-4 focus:ring-gold/20"
+          >
+            {deliveryMethods.length ? (
+              deliveryMethods.map((method) => (
+                <option key={method.DeliveryTypeId} value={String(method.DeliveryTypeId)}>
+                  {method.Name}
+                </option>
+              ))
+            ) : (
+              <option>{deliveryMethodsQuery.isError ? labels.methodsUnavailable : labels.loadingMethods}</option>
+            )}
+          </select>
+        </label>
+
+        <dl className="grid gap-3 py-4 text-sm">
           <div className="flex items-center justify-between gap-4">
-            <dt className="text-slate-500">{labels.delivery}</dt>
-            <dd className="font-black text-navy">{labels.minutes}</dd>
+            <dt className="font-semibold text-slate-500">{labels.fee}</dt>
+            <dd className="font-black text-navy">
+              {amountFormatter.format(fee)} {selectedFrom?.CurrencyInitial ?? ''} {labels.included}
+            </dd>
           </div>
         </dl>
 
+        <p className="flex items-center justify-center gap-2 rounded-xl bg-blue-50 px-3 py-2.5 text-center text-xs font-bold text-navy">
+          <ShieldCheck className="h-4 w-4 shrink-0" aria-hidden="true" />
+          {labels.exactAmount}
+        </p>
+
         {isError ? (
-          <p className="mt-4 rounded-2xl bg-red-50 p-3 text-sm font-semibold text-red-700">
+          <p className="mt-3 rounded-xl bg-red-50 p-3 text-sm font-semibold text-red-700">
             {labels.error}
           </p>
         ) : null}
 
-        <Button asChild className="mt-4 w-full rounded-2xl">
+        <Button asChild className="mt-4 w-full rounded-xl">
           <a href={LOGIN_URL} target="_blank" rel="noreferrer">
-            {dictionary.actions.sendMoney} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            {dictionary.actions.sendMoney}
           </a>
         </Button>
       </div>

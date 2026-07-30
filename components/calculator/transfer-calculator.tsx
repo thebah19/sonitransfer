@@ -79,7 +79,7 @@ export function TransferCalculator() {
     retry: 1
   });
 
-  const fromCurrencies = fromCurrenciesQuery.data ?? [];
+  const fromCurrencies = useMemo(() => fromCurrenciesQuery.data ?? [], [fromCurrenciesQuery.data]);
   const selectedFrom = useMemo(
     () => fromCurrencies.find((currency) => currencyFromKey(currency) === fromKey) ?? fromCurrencies[0],
     [fromCurrencies, fromKey]
@@ -97,7 +97,7 @@ export function TransferCalculator() {
     retry: 1
   });
 
-  const toCurrencies = toCurrenciesQuery.data ?? [];
+  const toCurrencies = useMemo(() => toCurrenciesQuery.data ?? [], [toCurrenciesQuery.data]);
   const selectedTo = useMemo(
     () => toCurrencies.find((currency) => currencyToKey(currency) === toKey) ?? toCurrencies[0],
     [toCurrencies, toKey]
@@ -110,7 +110,7 @@ export function TransferCalculator() {
     retry: 1
   });
 
-  const deliveryMethods = deliveryMethodsQuery.data ?? [];
+  const deliveryMethods = useMemo(() => deliveryMethodsQuery.data ?? [], [deliveryMethodsQuery.data]);
   const preferredDelivery = useMemo(
     () =>
       deliveryMethods.find((method) => /cash\s*pick/i.test(method.Name)) ??

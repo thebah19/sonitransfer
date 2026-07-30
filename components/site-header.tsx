@@ -17,32 +17,32 @@ export function SiteHeader() {
   const dictionary = getDictionary(locale);
   const currentPath = stripLocale(pathname);
   const navItems = [
-    { href: '/', label: dictionary.nav.home },
-    { href: '/blog', label: dictionary.nav.blog },
-    { href: '/contact', label: dictionary.nav.contact }
+    { href: '/#how-it-works', label: dictionary.nav.howItWorks },
+    { href: '/#ways-to-receive', label: dictionary.nav.waysToReceive },
+    { href: '/help-faqs', label: dictionary.nav.help }
   ];
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur-xl">
-      <div className="container-custom grid min-h-[68px] grid-cols-[auto_1fr_auto] items-center gap-3 md:min-h-[72px]">
-        <Link href={withLocale(locale, '/')} className="flex w-[142px] items-center text-navy sm:w-[168px] lg:w-[180px]" aria-label="Soni Transfer home">
+      <div className="container-custom grid min-h-[72px] grid-cols-[1fr_auto] items-center gap-4 lg:grid-cols-[auto_1fr_auto] lg:min-h-[78px]">
+        <Link href={withLocale(locale, '/')} className="flex w-[164px] items-center sm:w-[182px]" aria-label="Soni Transfer home">
           <Image
             src="/brand/logo.svg"
             alt="Soni Transfer"
             width={417}
             height={116}
             priority
-            className="h-auto w-full"
+            className="block h-auto w-full"
           />
         </Link>
 
-        <nav className="hidden justify-self-center xl:block" aria-label="Primary navigation">
-          <div className="flex items-center gap-1">
+        <nav className="hidden justify-self-start lg:block lg:pl-10 xl:pl-16" aria-label="Primary navigation">
+          <div className="flex items-center gap-2">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={withLocale(locale, item.href)}
-                className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-50 hover:text-navy 2xl:px-4"
+                className="rounded-xl px-3 py-2 text-sm font-bold text-navy transition-colors hover:bg-blue-50"
               >
                 {item.label}
               </Link>
@@ -50,18 +50,16 @@ export function SiteHeader() {
           </div>
         </nav>
 
-        <div className="hidden items-center gap-2 xl:flex">
+        <div className="hidden items-center gap-2 lg:flex">
             <LanguageSwitcher locale={locale} currentPath={currentPath} />
-            <Button asChild variant="outline" className="min-h-10 rounded-xl px-4 py-2">
+            <Button asChild variant="ghost" className="min-h-10 rounded-xl px-4 py-2">
               <a href={LOGIN_URL} target="_blank" rel="noreferrer">
-                <LogIn className="h-4 w-4" aria-hidden="true" />
                 {dictionary.nav.login}
               </a>
             </Button>
-            <Button asChild className="min-h-10 rounded-xl px-4 py-2">
+            <Button asChild className="min-h-10 rounded-full px-6 py-2">
               <a href={SIGNUP_URL} target="_blank" rel="noreferrer">
-                <UserPlus className="h-4 w-4" aria-hidden="true" />
-                {dictionary.nav.signup}
+                {dictionary.actions.sendMoney}
               </a>
             </Button>
         </div>
@@ -69,7 +67,7 @@ export function SiteHeader() {
         <Dialog.Root>
           <Dialog.Trigger asChild>
             <button
-              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-navy/15 bg-blue-50/70 text-navy shadow-sm shadow-navy/5 xl:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-navy/15 bg-blue-50/70 text-navy shadow-sm shadow-navy/5 lg:hidden"
               aria-label={dictionary.nav.menu}
             >
               <Menu className="h-5 w-5" />
@@ -134,7 +132,7 @@ export function SiteHeader() {
                 <Button asChild>
                   <a href={SIGNUP_URL} target="_blank" rel="noreferrer">
                     <UserPlus className="h-4 w-4" aria-hidden="true" />
-                    {dictionary.nav.signup}
+                    {dictionary.actions.sendMoney}
                   </a>
                 </Button>
               </div>

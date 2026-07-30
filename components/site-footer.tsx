@@ -104,7 +104,7 @@ export function SiteFooter() {
               <div className="my-5 h-px max-w-5xl bg-white/30" aria-hidden="true" />
 
               <p className="text-sm font-semibold leading-7 text-white/95 md:text-base">
-                Soni Transfer's payment services in the European Economic Area (EEA) territory are provided through a white-label partnership with Belmoney S.A., a payment institution licensed and under supervision of the National Bank of Belgium, registration no. 0540.745.997, with passport rights to operate in all EEA countries in accordance with PSD2 (Directive (EU) 2015/2366). All payments in the EEA are powered and processed by Belmoney in accordance with Belgian and European law.
+                Soni Transfer’s payment services in the European Economic Area (EEA) territory are provided through a white-label partnership with Belmoney S.A., a payment institution licensed and under supervision of the National Bank of Belgium, registration no. 0540.745.997, with passport rights to operate in all EEA countries in accordance with PSD2 (Directive (EU) 2015/2366). All payments in the EEA are powered and processed by Belmoney in accordance with Belgian and European law.
               </p>
 
               <p className="mt-4 text-sm italic leading-6 text-white/90">
