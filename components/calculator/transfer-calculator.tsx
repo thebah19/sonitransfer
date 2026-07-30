@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowRightLeft, Banknote, Clock3, Info, Loader2, ShieldCheck } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import { withBasePath } from '@/lib/base-path';
 import type {
   RemitecCurrencyFrom,
   RemitecCurrencyTo,
@@ -15,7 +16,7 @@ import type {
 const APP_LOGIN_URL = 'https://app.sonitransfer.com/#/ext/login/en-GB';
 
 async function getJson<T>(url: string): Promise<T> {
-  const response = await fetch(url);
+  const response = await fetch(withBasePath(url));
 
   if (!response.ok) {
     throw new Error('Calculator data is currently unavailable.');

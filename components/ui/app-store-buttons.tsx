@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { withBasePath } from '@/lib/base-path';
 import { cn } from '@/lib/utils';
 import type { Locale } from '@/data/i18n';
 
@@ -17,7 +18,7 @@ export function AppStoreButtons({ className, light = false, locale = 'en' }: { c
         className={cn('inline-flex h-[60px] items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold', light && 'rounded-md bg-white')}
         aria-label="Download on the App Store"
       >
-        <Image src="/store-badges/download-on-the-app-store.svg" alt="Download on the App Store" width={150} height={50} className="h-[50px] w-auto" />
+        <Image src={withBasePath('/store-badges/download-on-the-app-store.svg')} alt="Download on the App Store" width={150} height={50} className="h-[50px] w-auto" />
       </a>
       <a
         href={GOOGLE_PLAY_URL}
@@ -26,7 +27,7 @@ export function AppStoreButtons({ className, light = false, locale = 'en' }: { c
         className={cn('inline-flex h-[60px] items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold', light && 'rounded-md bg-white')}
         aria-label="Get it on Google Play"
       >
-        <Image src="/store-badges/get-it-on-google-play.png" alt="Get it on Google Play" width={646} height={250} className="h-[60px] w-auto" />
+        <Image src={withBasePath('/store-badges/get-it-on-google-play.png')} alt="Get it on Google Play" width={646} height={250} className="h-[60px] w-auto" />
       </a>
     </div>
   );

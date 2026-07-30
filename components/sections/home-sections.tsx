@@ -24,6 +24,7 @@ import { getDictionary, type Locale } from '@/data/i18n';
 import { AppStoreButtons } from '@/components/ui/app-store-buttons';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { withBasePath } from '@/lib/base-path';
 import type { RemitecCurrencyFrom, RemitecCurrencyTo, RemitecDeliveryMethod, RemitecQuotation } from '@/types';
 
 const fadeUp = {
@@ -56,7 +57,7 @@ const rateFormatter = new Intl.NumberFormat('en-GB', {
 });
 
 async function getJson<T>(url: string): Promise<T> {
-  const response = await fetch(url);
+  const response = await fetch(withBasePath(url));
 
   if (!response.ok) {
     throw new Error('Calculator data is currently unavailable.');
@@ -226,19 +227,19 @@ function AppShowcase({ locale }: { locale: Locale }) {
           className="relative mx-auto h-[300px] w-full max-w-[430px] md:h-[360px]"
         >
           <PhoneMockup
-            src="/app-screens/home.png"
+            src={withBasePath('/app-screens/home.png')}
             alt="Soni Transfer app home screen"
             muted
             className="absolute bottom-3 left-[8%] z-0 w-[118px] -rotate-6 md:left-[5%] md:w-[142px]"
           />
           <PhoneMockup
-            src="/app-screens/great-rates.png"
+            src={withBasePath('/app-screens/great-rates.png')}
             alt="Soni Transfer app rates screen"
             priority
             className="absolute bottom-0 left-1/2 z-20 w-[158px] -translate-x-1/2 md:w-[188px]"
           />
           <PhoneMockup
-            src="/app-screens/register.png"
+            src={withBasePath('/app-screens/register.png')}
             alt="Soni Transfer app registration screen"
             muted
             className="absolute bottom-3 right-[8%] z-10 w-[118px] rotate-6 md:right-[5%] md:w-[142px]"

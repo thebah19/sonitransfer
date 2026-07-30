@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import { Providers } from '@/components/providers';
+import { withBasePath } from '@/lib/base-path';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://sonitransfer.com'),
@@ -17,8 +18,8 @@ export const metadata: Metadata = {
     type: 'website'
   },
   icons: {
-    icon: '/brand/favicon.png',
-    apple: '/brand/icon.png'
+    icon: withBasePath('/brand/favicon.png'),
+    apple: withBasePath('/brand/icon.png')
   }
 };
 

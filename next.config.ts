@@ -1,4 +1,12 @@
 import type { NextConfig } from 'next';
+
+const configuredBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+const basePath = configuredBasePath === '/' ? '' : configuredBasePath.replace(/\/+$/, '');
+
+if (basePath && !basePath.startsWith('/')) {
+  throw new Error('NEXT_PUBLIC_BASE_PATH must start with a forward slash.');
+}
+
 const legacySlugs = [
   'about-us',
   'airtime-cash-power',
@@ -20,6 +28,7 @@ const legacySlugs = [
 ];
 
 const nextConfig: NextConfig = {
+  basePath,
   async redirects() {
     return [
       ...legacySlugs.map((slug) => ({

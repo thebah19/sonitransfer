@@ -7,6 +7,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { ChevronDown, LogIn, Menu, ShieldCheck, UserPlus, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getDictionary, localeFromPathname, locales, stripLocale, withLocale, type Locale } from '@/data/i18n';
+import { withBasePath } from '@/lib/base-path';
 
 const LOGIN_URL = 'https://app.sonitransfer.com/#/ext/login/en-GB';
 const SIGNUP_URL = 'https://app.sonitransfer.com/#/ext/signup/en-GB';
@@ -27,7 +28,7 @@ export function SiteHeader() {
       <div className="container-custom grid min-h-[72px] grid-cols-[1fr_auto] items-center gap-4 lg:grid-cols-[auto_1fr_auto] lg:min-h-[78px]">
         <Link href={withLocale(locale, '/')} className="flex w-[164px] items-center sm:w-[182px]" aria-label="Soni Transfer home">
           <Image
-            src="/brand/logo.svg"
+            src={withBasePath('/brand/logo.svg')}
             alt="Soni Transfer"
             width={417}
             height={116}
@@ -81,7 +82,7 @@ export function SiteHeader() {
                 <Dialog.Description className="sr-only">
                   Primary navigation, language options, and account links.
                 </Dialog.Description>
-                <Image src="/brand/logo.svg" alt="Soni Transfer" width={240} height={67} className="h-auto w-48" />
+                <Image src={withBasePath('/brand/logo.svg')} alt="Soni Transfer" width={240} height={67} className="h-auto w-48" />
                 <Dialog.Close className="rounded-lg p-2 text-ink hover:bg-slate-100" aria-label="Close menu">
                   <X className="h-5 w-5" />
                 </Dialog.Close>

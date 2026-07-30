@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Clock3, Mail, Phone } from 'lucide-react';
 import { AppStoreButtons } from '@/components/ui/app-store-buttons';
+import { withBasePath } from '@/lib/base-path';
 import { getDictionary, localeFromPathname, withLocale } from '@/data/i18n';
 
 const quickLinks = [
@@ -57,7 +58,7 @@ export function SiteFooter() {
           <div>
             <Link href={withLocale(locale, '/')} className="inline-flex w-[230px] items-center sm:w-[270px]" aria-label="Soni Transfer home">
               <Image
-                src="/brand/logo-white.svg"
+                src={withBasePath('/brand/logo-white.svg')}
                 alt="Soni Transfer"
                 width={417}
                 height={116}
