@@ -59,7 +59,7 @@ jobs:
             -e 'ssh -i ~/.ssh/soni-staging' \
             dist/client/ "$STAGING_USER@$STAGING_HOST:~/$release_path/"
           ssh -i ~/.ssh/soni-staging "$STAGING_USER@$STAGING_HOST" \
-            "rsync -rlptD --delete --chmod=Dg+rwx,Do+rx,Fg+rw,Fo+r ~/$release_path/ /var/www/stagging-soni-transfer-prototype/"
+            "rsync -rlptD --omit-dir-times --delete --chmod=Dg+rwx,Do+rx,Fg+rw,Fo+r ~/$release_path/ /var/www/stagging-soni-transfer-prototype/"
 
       - name: Verify deployed review
         run: |
