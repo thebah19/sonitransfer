@@ -1,0 +1,2 @@
+# Allow the staging deployment account to restart only the Soni Transfer service.
+mbah ALL=(root) NOPASSWD: /bin/systemctl restart soni-staging-next.service

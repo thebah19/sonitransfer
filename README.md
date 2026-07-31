@@ -60,4 +60,12 @@ The deployment user requires passwordless permission for this command only:
 /bin/systemctl restart soni-staging-next.service
 ```
 
+Install and validate the tracked least-privilege sudoers policy once on the
+staging host:
+
+```bash
+sudo install -o root -g root -m 0440 ops/sudoers.d/soni-staging-deploy /etc/sudoers.d/soni-staging-deploy
+sudo visudo -cf /etc/sudoers.d/soni-staging-deploy
+```
+
 Rollback is automatic when activation fails. A manual rollback can be performed by moving the desired backup from `~/deployments/sonitransfer/backups/` into `/var/www/stagging-soni-transfer-com` and restarting the service.
