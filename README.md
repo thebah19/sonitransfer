@@ -1,6 +1,7 @@
 # Soni Transfer Website
 
-Next.js App Router website for Soni Transfer.
+Production React website for Soni Transfer. The public site uses the approved
+Option 2 layout and connects its calculator to the live Remitec quotation API.
 
 ## Deployment
 
@@ -10,25 +11,26 @@ Next.js App Router website for Soni Transfer.
 npm install
 ```
 
-2. Configure environment variables on the hosting platform:
-
-```bash
-REMITEC_API_BASE_URL=https://app.sonitransfer.com/api
-```
-
-3. Build the site:
+2. Build the site:
 
 ```bash
 npm run build
 ```
 
-4. Start the production server:
+3. Start the production server:
 
 ```bash
 npm run start
 ```
 
-The Remitec calculator uses server-side API routes under `/api/remitec/*`, so the deployment server must be able to resolve and reach the Remitec API host.
+The production server listens on `PORT` (default `3001`), serves the built SPA,
+supports clean legal-page URLs and `/en`, and proxies the calculator through
+`/api/remitec/*` to the live Soni Transfer service. It deliberately has no
+fallback exchange-rate data, so customers never see a stale quotation presented
+as live.
+
+For local development, run `npm run dev`. Development mode includes the three
+layout drafts for review; production builds publish Option 2 only.
 
 ## Staging deployment
 

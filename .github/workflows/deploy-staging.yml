@@ -36,6 +36,9 @@ jobs:
       - name: Build application
         run: npm run build
 
+      - name: Test calculator proxy and app routing
+        run: npm run test:sites
+
       - name: Configure staging SSH access
         env:
           STAGING_SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
@@ -57,7 +60,7 @@ jobs:
           rsync -az --delete \
             --exclude='.git/' \
             --exclude='.github/' \
-            --exclude='.next/' \
+            --exclude='dist/' \
             --exclude='node_modules/' \
             -e 'ssh -i ~/.ssh/soni-staging' \
             ./ "$STAGING_USER@$STAGING_HOST:~/$release_path/"
