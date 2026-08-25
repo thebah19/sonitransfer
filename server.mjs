@@ -8,6 +8,26 @@ const root = path.dirname(fileURLToPath(import.meta.url));
 const clientRoot = path.join(root, "dist", "client");
 const port = Number(process.env.PORT || 3001);
 
+// Only Vite's own output carries a content hash in the filename, so only those
+// files are safe to cache forever. Guessing from the filename shape marked
+// public/ images immutable by accident, pinning them in browsers for a year.
+async function readHashedAssets() {
+  try {
+    const manifest = JSON.parse(await readFile(path.join(clientRoot, ".vite", "manifest.json"), "utf8"));
+    const files = new Set();
+    for (const entry of Object.values(manifest)) {
+      if (entry.file) files.add(entry.file);
+      for (const css of entry.css ?? []) files.add(css);
+      for (const asset of entry.assets ?? []) files.add(asset);
+    }
+    return files;
+  } catch {
+    return new Set();
+  }
+}
+
+const hashedAssets = await readHashedAssets();
+
 const contentTypes = new Map([
   [".css", "text/css; charset=utf-8"],
   [".html", "text/html; charset=utf-8"],
@@ -18,8 +38,10 @@ const contentTypes = new Map([
   [".json", "application/json; charset=utf-8"],
   [".png", "image/png"],
   [".svg", "image/svg+xml"],
+  [".txt", "text/plain; charset=utf-8"],
   [".webp", "image/webp"],
   [".woff2", "font/woff2"],
+  [".xml", "application/xml; charset=utf-8"],
 ]);
 
 async function staticResponse(request) {
@@ -37,7 +59,7 @@ async function staticResponse(request) {
     if (!fileStat.isFile()) return new Response("Not found", { status: 404 });
     const body = request.method === "HEAD" ? null : await readFile(filePath);
     const extension = path.extname(filePath).toLowerCase();
-    const immutable = relativePath.startsWith("assets/") && /-[A-Za-z0-9_-]{8,}\./.test(relativePath);
+    const immutable = hashedAssets.has(relativePath);
     return new Response(body, {
       status: 200,
       headers: {

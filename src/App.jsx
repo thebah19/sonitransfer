@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  ArrowRight,
   Bank,
   Check,
   CurrencyGbp,
@@ -16,6 +17,7 @@ import { getLegalPage } from "./legalContent";
 
 const assetUrl = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
 const reviewMode = import.meta.env.DEV || import.meta.env.VITE_REVIEW_MODE === "true";
+const APP_LOGIN_URL = "https://app.sonitransfer.com/#/ext/login/en-GB";
 const APP_STORE_URL = "https://apps.apple.com/app/id1464484976";
 const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.UnityRemit.UnityRemit&gl=GB";
 
@@ -25,10 +27,16 @@ const options = [
   { id: "3", label: "Selected split" },
 ];
 
+// The worker serves this same shell for a missing page with a 404 status, so
+// the app has to be able to render a not-found view rather than the homepage.
+const HOME_PATHS = new Set(["", "en"]);
+
 function useHashRoute() {
   const read = () => {
-    const pathSlug = window.location.pathname.split("/").filter(Boolean).at(-1) ?? "";
+    const segments = window.location.pathname.split("/").filter(Boolean);
+    const pathSlug = segments.at(-1) ?? "";
     if (pathSlug && getLegalPage(pathSlug)) return `legal/${pathSlug}`;
+    if (!HOME_PATHS.has(segments.join("/"))) return "notfound";
 
     const value = window.location.hash.replace("#/", "");
     const legalSlug = value.startsWith("legal/") ? value.slice("legal/".length) : "";
@@ -85,7 +93,7 @@ function Header({ variant = "white", showCta = true, homeOnly = false }) {
         <a href={sectionHref("support")}>Help</a>
       </nav>
       <div className="header-actions">
-        <button className="text-button">Log in</button>
+        <a className="text-button" href={APP_LOGIN_URL} target="_blank" rel="noreferrer">Log in</a>
         {showCta && (
           <a className={`button ${variant === "cream" ? "button-blue" : "button-orange"} button-small`} href={homeOnly ? "/#calculator" : "#calculator"}>
             Send money
@@ -152,7 +160,7 @@ function ReceiveMethods({ portrait = false, minimal = false }) {
             </article>
           ))}
         </div>
-        {portrait && <img className="portrait-image" src={assetUrl("/assets/woman-portrait.png")} alt="A smiling Soni Transfer customer" />}
+        {portrait && <img className="portrait-image" src={assetUrl("/assets/woman-portrait.jpg")} alt="A smiling Soni Transfer customer" />}
       </div>
     </section>
   );
@@ -299,7 +307,7 @@ function OptionOne() {
       <TrustRow />
       <Steps />
       <section className="family-banner">
-        <img src={assetUrl("/assets/family-banner.png")} alt="A smiling family together in their courtyard" />
+        <img src={assetUrl("/assets/family-banner.jpg")} alt="A smiling family together in their courtyard" />
         <div>
           <h2>Built around the people you send for.</h2>
           <p>Simple support for the people who matter most.</p>
@@ -362,7 +370,7 @@ function OptionThree() {
       </section>
       <Steps />
       <section className="family-wide">
-        <img src={assetUrl("/assets/family-wide.png")} alt="A family sharing a warm moment together" />
+        <img src={assetUrl("/assets/family-wide.jpg")} alt="A family sharing a warm moment together" />
         <h2>Built around the people you send for</h2>
       </section>
       <ReceiveMethods minimal />
@@ -374,9 +382,32 @@ function OptionThree() {
   );
 }
 
+function NotFoundPage() {
+  return (
+    <section className="section not-found">
+      <p className="eyebrow">Page not found</p>
+      <h1>We could not find that page.</h1>
+      <p>The page may have moved or no longer exists. You can start a transfer or read our policies from the homepage.</p>
+      <a className="button button-orange" href="/">
+        Go to the homepage <ArrowRight size={18} weight="bold" aria-hidden="true" />
+      </a>
+    </section>
+  );
+}
+
 export function App() {
   const route = useHashRoute();
   const legalSlug = route.startsWith("legal/") ? route.slice("legal/".length) : null;
+
+  if (route === "notfound") {
+    return (
+      <main id="top" className="draft draft-two">
+        <Header homeOnly />
+        <NotFoundPage />
+        <Footer homeOnly />
+      </main>
+    );
+  }
 
   if (legalSlug) {
     return (

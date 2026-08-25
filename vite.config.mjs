@@ -22,6 +22,9 @@ export default defineConfig({
   base: process.env.VITE_BASE_PATH || "/",
   build: {
     outDir: "dist/client",
+    // The server uses the manifest to tell content-hashed bundles apart from
+    // files copied verbatim out of public/.
+    manifest: true,
   },
   optimizeDeps: {
     include: ["react", "react-dom/client"],

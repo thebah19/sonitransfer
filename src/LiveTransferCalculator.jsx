@@ -21,6 +21,7 @@ import {
 } from "./remitec";
 
 const APP_LOGIN_URL = "https://app.sonitransfer.com/#/ext/login/en-GB";
+const QUOTE_TTL_MS = 5 * 60 * 1000;
 const moneyFormatter = new Intl.NumberFormat("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const rateFormatter = new Intl.NumberFormat("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 7 });
 
@@ -55,14 +56,19 @@ function flagEmoji(countryCode) {
 }
 
 function calculateFee(fees, sendAmount) {
+  if (sendAmount <= 0) return null;
   const feeBand = fees.find((item) => sendAmount >= Number(item.InitValue) && sendAmount <= Number(item.EndValue));
-  if (!feeBand || sendAmount <= 0) return 0;
-  return Number(feeBand.Value) + sendAmount * (Number(feeBand.Percentage) / 100);
+  // No band covers this amount, so the fee is genuinely unknown. Returning 0
+  // here would advertise a free transfer.
+  if (!feeBand) return null;
+  const fee = Number(feeBand.Value) + sendAmount * (Number(feeBand.Percentage) / 100);
+  return Number.isFinite(fee) ? fee : null;
 }
 
 export function LiveTransferCalculator({ variant = "editorial", initialAmount = "100" }) {
   const [calculator, setCalculator] = useState(initialCalculatorState);
   const [sendAmount, setSendAmount] = useState(initialAmount);
+  const [quoteExpired, setQuoteExpired] = useState(false);
   const requestId = useRef(0);
   const abortRef = useRef(null);
 
@@ -114,6 +120,13 @@ export function LiveTransferCalculator({ variant = "editorial", initialAmount = 
     loadCalculator();
     return () => abortRef.current?.abort();
   }, [loadCalculator]);
+
+  useEffect(() => {
+    if (!calculator.quotation) return undefined;
+    setQuoteExpired(false);
+    const timer = setTimeout(() => setQuoteExpired(true), QUOTE_TTL_MS);
+    return () => clearTimeout(timer);
+  }, [calculator.quotation]);
 
   const selectSendingCurrency = async (nextKey) => {
     const sending = calculator.sendingCurrencies.find((currency) => sendingCurrencyKey(currency) === nextKey);
@@ -187,10 +200,15 @@ export function LiveTransferCalculator({ variant = "editorial", initialAmount = 
   const parsedAmount = Number(sendAmount);
   const validAmount = Number.isFinite(parsedAmount) && parsedAmount > 0;
   const rate = Number(calculator.quotation?.SellRates ?? 0);
-  const isReady = calculator.status === "ready" && rate > 0 && validAmount;
+  const quotedFee = calculator.status === "ready" && rate > 0 && validAmount
+    ? calculateFee(calculator.quotation.Fees, parsedAmount)
+    : null;
+  // Without a fee we cannot show the true cost, so the quote is not complete.
+  const isReady = calculator.status === "ready" && rate > 0 && validAmount && quotedFee !== null && !quoteExpired;
   const receiveAmount = isReady ? parsedAmount * rate : 0;
-  const fee = isReady ? calculateFee(calculator.quotation.Fees, parsedAmount) : 0;
+  const fee = quotedFee;
   const isLoading = calculator.status === "loading";
+  const amountOutOfRange = calculator.status === "ready" && rate > 0 && validAmount && quotedFee === null;
 
   return (
     <form
@@ -208,7 +226,7 @@ export function LiveTransferCalculator({ variant = "editorial", initialAmount = 
         </div>
         <span className={`live-status live-status-${calculator.status}`} aria-live="polite">
           {isLoading ? <SpinnerGap size={17} className="spin" aria-hidden="true" /> : <ShieldCheck size={17} weight="bold" aria-hidden="true" />}
-          {isLoading ? "Updating" : calculator.status === "ready" ? "Live quotation" : "Unavailable"}
+          {isLoading ? "Updating" : quoteExpired ? "Rate expired" : calculator.status === "ready" ? "Live quotation" : "Unavailable"}
         </span>
       </div>
 
@@ -296,6 +314,20 @@ export function LiveTransferCalculator({ variant = "editorial", initialAmount = 
       ) : null}
 
       {!validAmount && !isLoading ? <p className="live-validation" role="status">Enter an amount to see the exchange rate and recipient amount.</p> : null}
+
+      {quoteExpired && !isLoading ? (
+        <div className="live-calculator-error" role="alert">
+          <WarningCircle size={20} weight="bold" aria-hidden="true" />
+          <span>This rate is more than five minutes old. Refresh it before you continue.</span>
+          <button type="button" onClick={loadCalculator}>Refresh rate</button>
+        </div>
+      ) : null}
+
+      {amountOutOfRange ? (
+        <p className="live-validation" role="status">
+          We cannot quote a transfer fee for this amount. Please try a different amount or contact support.
+        </p>
+      ) : null}
 
       <button className="button button-orange live-calculator-submit" type="submit" disabled={!isReady}>
         Continue <ArrowRight size={18} weight="bold" aria-hidden="true" />

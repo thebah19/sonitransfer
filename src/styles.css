@@ -740,6 +740,26 @@ select:focus-visible {
   justify-content: center;
 }
 
+.not-found {
+  max-width: 620px;
+  padding-block: clamp(60px, 9vw, 120px);
+}
+
+.not-found h1 {
+  margin: 0 0 18px;
+  color: var(--blue);
+  font-size: clamp(34px, 4.2vw, 54px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.not-found > p:not(.eyebrow) {
+  margin: 0 0 30px;
+  color: var(--gray);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
 .portrait-image {
   width: 100%;
   max-height: 510px;
