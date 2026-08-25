@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { ArrowRight, CalendarBlank, FileText, ShieldCheck } from "@phosphor-icons/react";
+import { ArrowRight, CalendarBlank, FileText, ShieldCheck, Translate } from "@phosphor-icons/react";
 import { getLegalPage } from "./legalContent";
+import { useCopy } from "./i18n";
 
 const linkedReferences = {
   "support@sonitransfer.com": "mailto:support@sonitransfer.com",
@@ -63,16 +63,8 @@ function LegalSectionBlock({ section, index, depth = 0 }) {
 }
 
 export function LegalContentPage({ slug }) {
+  const copy = useCopy();
   const page = getLegalPage(slug);
-
-  useEffect(() => {
-    if (!page) return undefined;
-    const previousTitle = document.title;
-    document.title = `${page.title} | Soni Transfer`;
-    return () => {
-      document.title = previousTitle;
-    };
-  }, [page]);
 
   if (!page) return null;
 
@@ -80,23 +72,30 @@ export function LegalContentPage({ slug }) {
     <>
       <section className="legal-hero">
         <div className="legal-hero-inner">
-          <div className="legal-hero-copy">
+          <div className="legal-hero-copy" lang="en">
             <p className="eyebrow">{page.eyebrow}</p>
             <h1>{page.title}</h1>
             <p>{page.description}</p>
           </div>
-          <aside className="legal-meta" aria-label="Document information">
-            <span><CalendarBlank size={20} aria-hidden="true" /> Last updated <strong>{page.lastUpdated}</strong></span>
-            <span><FileText size={20} aria-hidden="true" /> Version <strong>{page.version}</strong></span>
+          <aside className="legal-meta" aria-label={copy.legal.docInfo}>
+            <span><CalendarBlank size={20} aria-hidden="true" /> {copy.legal.lastUpdated} <strong>{page.lastUpdated}</strong></span>
+            <span><FileText size={20} aria-hidden="true" /> {copy.legal.version} <strong>{page.version}</strong></span>
           </aside>
         </div>
       </section>
 
+      {copy.legal.governing ? (
+        <p className="legal-governing">
+          <Translate size={19} weight="regular" aria-hidden="true" />
+          {copy.legal.governing}
+        </p>
+      ) : null}
+
       <div className="legal-content-shell">
         <aside className="legal-toc">
           <div>
-            <span>On this page</span>
-            <nav aria-label={`${page.title} sections`}>
+            <span>{copy.legal.onThisPage}</span>
+            <nav aria-label={`${page.title} ${copy.legal.sectionsAria}`} lang="en">
               {page.sections.map((section, index) => {
                 const targetId = sectionId(section.title, index + 1);
                 return (
@@ -109,10 +108,10 @@ export function LegalContentPage({ slug }) {
           </div>
         </aside>
 
-        <article className="legal-article">
+        <article className="legal-article" lang="en">
           <div className="legal-notice">
             <ShieldCheck size={24} weight="regular" aria-hidden="true" />
-            <p>This document forms part of the information governing your use of Soni Transfer services. Please read it carefully.</p>
+            <p lang={undefined}>{copy.legal.notice}</p>
           </div>
           {page.sections.map((section, index) => (
             <LegalSectionBlock key={section.title} section={section} index={index + 1} />
@@ -122,12 +121,12 @@ export function LegalContentPage({ slug }) {
 
       <section className="legal-help">
         <div>
-          <p className="eyebrow">Questions about this policy?</p>
-          <h2>We’re here to help.</h2>
-          <p>Contact our support team if you need this information in another format or would like help understanding it.</p>
+          <p className="eyebrow">{copy.legal.helpEyebrow}</p>
+          <h2>{copy.legal.helpTitle}</h2>
+          <p>{copy.legal.helpBody}</p>
         </div>
         <a className="button button-orange" href="mailto:support@sonitransfer.com">
-          Contact support <ArrowRight size={18} weight="bold" aria-hidden="true" />
+          {copy.legal.helpCta} <ArrowRight size={18} weight="bold" aria-hidden="true" />
         </a>
       </section>
     </>

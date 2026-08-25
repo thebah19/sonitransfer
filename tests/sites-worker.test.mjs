@@ -18,27 +18,76 @@ test("serves existing static assets without a fallback", async () => {
   assert.deepEqual(calls, ["/assets/app.js"]);
 });
 
-test("falls back to index.html for an unknown app route", async () => {
+const shellAssets = () => {
   const calls = [];
+  return {
+    calls,
+    ASSETS: {
+      fetch: async (request) => {
+        const url = new URL(request.url);
+        calls.push(url.pathname + url.search);
+        const isShell = url.pathname === "/index.html";
+        return new Response(isShell ? "app" : "missing", { status: isShell ? 200 : 404 });
+      },
+    },
+  };
+};
+
+test("serves the app shell with a 200 for a real page route", async () => {
+  const assets = shellAssets();
+  const response = await worker.fetch(
+    new Request("https://example.test/privacy-policy", { headers: { accept: "text/html" } }),
+    { ASSETS: assets.ASSETS },
+  );
+
+  assert.equal(response.status, 200);
+  assert.deepEqual(assets.calls, ["/privacy-policy", "/index.html"]);
+});
+
+test("keeps the /en health-check route serving the app", async () => {
+  const assets = shellAssets();
+  const response = await worker.fetch(
+    new Request("https://example.test/en", { headers: { accept: "text/html" } }),
+    { ASSETS: assets.ASSETS },
+  );
+
+  assert.equal(response.status, 200);
+});
+
+test("returns a 404 status for a route the app does not have", async () => {
+  const assets = shellAssets();
   const response = await worker.fetch(
     new Request("https://example.test/flow/step-two?source=share", {
       headers: { accept: "text/html" },
     }),
-    {
-      ASSETS: {
-        fetch: async (request) => {
-          const url = new URL(request.url);
-          calls.push(url.pathname + url.search);
-          return new Response(url.pathname === "/index.html" ? "app" : "missing", {
-            status: url.pathname === "/index.html" ? 200 : 404,
-          });
-        },
-      },
-    },
+    { ASSETS: assets.ASSETS },
   );
 
-  assert.equal(response.status, 200);
-  assert.deepEqual(calls, ["/flow/step-two?source=share", "/index.html"]);
+  // The shell still renders so the app can show a not-found view, but the
+  // status must not claim the page exists.
+  assert.equal(response.status, 404);
+  assert.equal(await response.text(), "app");
+  assert.deepEqual(assets.calls, ["/flow/step-two?source=share", "/index.html"]);
+});
+
+test("redirects retired v1 pages to the homepage", async () => {
+  for (const path of ["/about-us", "/help-faqs", "/blog", "/blog/a-story", "/send-money", "/en/about-us"]) {
+    const response = await worker.fetch(new Request(`https://example.test${path}`), {
+      ASSETS: { fetch: async () => new Response("missing", { status: 404 }) },
+    });
+
+    assert.equal(response.status, 301, `${path} should redirect`);
+    assert.equal(new URL(response.headers.get("location")).pathname, "/", `${path} should land on /`);
+  }
+});
+
+test("redirects a surviving page reached through its old locale URL", async () => {
+  const response = await worker.fetch(new Request("https://example.test/en/privacy-policy"), {
+    ASSETS: { fetch: async () => new Response("missing", { status: 404 }) },
+  });
+
+  assert.equal(response.status, 301);
+  assert.equal(new URL(response.headers.get("location")).pathname, "/privacy-policy");
 });
 
 test("does not turn missing API or write requests into the app shell", async () => {
