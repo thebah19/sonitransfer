@@ -9,9 +9,12 @@ tmp/
 *.log
 
 # Source/reference material that is not required by the website runtime.
-CSR/
-LOGOS/
-Reference/
-SoniTransferBlog.docx
-audit-homepage/
-soni-transfer-website-deploy.zip
+# Anchored to the repository root: unanchored, "CSR/" also matched
+# public/assets/community/csr/ (git's ignore matching is case-insensitive on
+# macOS), which silently excluded nine images the homepage needs.
+/CSR/
+/LOGOS/
+/Reference/
+/SoniTransferBlog.docx
+/audit-homepage/
+/soni-transfer-website-deploy.zip
