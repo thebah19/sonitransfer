@@ -36,8 +36,8 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Test calculator proxy and app routing
-        run: npm run test:sites
+      - name: Test calculator proxy, app routing and translations
+        run: npm test
 
       - name: Configure staging SSH access
         env:
