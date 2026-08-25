@@ -692,11 +692,11 @@ select:focus-visible {
 
 .receive-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .receive-list article {
-  padding: 8px 34px;
+  padding: 8px 22px;
   display: flex;
   gap: 16px;
   align-items: flex-start;
@@ -801,32 +801,20 @@ select:focus-visible {
   gap: 12px;
 }
 
-.store-buttons button {
-  min-width: 170px;
-  min-height: 56px;
-  padding: 8px 16px;
-  border: 0;
+.store-buttons a {
+  display: inline-flex;
   border-radius: 7px;
-  background: #070707;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  cursor: pointer;
 }
 
-.store-buttons span {
-  display: grid;
-  text-align: left;
-  font-size: 16px;
-  font-weight: 600;
+.store-buttons a:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
 }
 
-.store-buttons small {
-  font-size: 9px;
-  font-weight: 400;
-  text-transform: uppercase;
+.store-buttons img {
+  display: block;
+  height: 56px;
+  width: auto;
 }
 
 .faq-list h2 {
@@ -2022,6 +2010,19 @@ select:focus-visible {
 
   .final-transfer-panel {
     max-width: 720px;
+  }
+
+  /* Five payout methods do not fit side by side below this width. */
+  .receive-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .receive-list article:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .receive-list article:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
   }
 }
 

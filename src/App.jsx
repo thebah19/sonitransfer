@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import {
-  AppleLogo,
   Bank,
   Check,
   CurrencyGbp,
-  GooglePlayLogo,
+  DeviceMobile,
+  Lightning,
   LockKey,
   Money,
   Phone,
@@ -16,6 +16,8 @@ import { getLegalPage } from "./legalContent";
 
 const assetUrl = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
 const reviewMode = import.meta.env.DEV || import.meta.env.VITE_REVIEW_MODE === "true";
+const APP_STORE_URL = "https://apps.apple.com/app/id1464484976";
+const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.UnityRemit.UnityRemit&gl=GB";
 
 const options = [
   { id: "1", label: "Bold blue" },
@@ -125,7 +127,9 @@ function Steps() {
 const receivingMethods = [
   [Money, "Cash pickup", "Collect cash from an available payout partner."],
   [Bank, "Bank deposit", "Send money directly to a supported bank account."],
-  [Phone, "Mobile wallet", "Send money to a supported mobile wallet."],
+  [Phone, "Wave - Mobile Wallet", "Send money straight to a supported Wave mobile wallet."],
+  [DeviceMobile, "Mobile credit", "Top up airtime credit on a supported mobile number."],
+  [Lightning, "Cash Power", "Buy prepaid electricity credit for a supported meter."],
 ];
 
 function ReceiveMethods({ portrait = false, minimal = false }) {
@@ -198,8 +202,12 @@ function DownloadAndFaq() {
         <h2>Send money on the go</h2>
         <p>Use Soni Transfer online or download the app to send money and manage your transfers.</p>
         <div className="store-buttons">
-          <button><AppleLogo size={28} weight="fill" /><span><small>Download on the</small>App Store</span></button>
-          <button><GooglePlayLogo size={27} weight="fill" /><span><small>Get it on</small>Google Play</span></button>
+          <a href={APP_STORE_URL} target="_blank" rel="noreferrer">
+            <img src={assetUrl("/assets/appstore-badge.png")} alt="Download Soni Transfer on the App Store" width="510" height="167" loading="lazy" />
+          </a>
+          <a href={GOOGLE_PLAY_URL} target="_blank" rel="noreferrer">
+            <img src={assetUrl("/assets/googleplay-badge.png")} alt="Get Soni Transfer on Google Play" width="510" height="168" loading="lazy" />
+          </a>
         </div>
       </div>
       <div className="faq-list">
