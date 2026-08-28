@@ -364,10 +364,10 @@ function DownloadAndReviews() {
           <p>{copy.download.body}</p>
           <div className="store-buttons">
             <button type="button" aria-label={copy.download.appStoreAria}>
-              <img src={assetUrl("/assets/brand/app-store-badge.svg")} alt={copy.download.appStoreAlt} />
+              <img className="app-store-badge" src={assetUrl("/assets/brand/app-store-badge.svg")} alt={copy.download.appStoreAlt} />
             </button>
             <button type="button" aria-label={copy.download.playAria}>
-              <img src={assetUrl("/assets/brand/google-play-badge.svg")} alt={copy.download.playAlt} />
+              <img className="google-play-badge" src={assetUrl("/assets/brand/google-play-badge.svg")} alt={copy.download.playAlt} />
             </button>
           </div>
         </div>

@@ -959,6 +959,18 @@ select:focus-visible {
   display: block;
 }
 
+/* The official badges have different internal padding around their glyph
+   and wordmark, so equal SVG height reads as unequal size: Google's badge
+   is visually larger than Apple's at the same 52px. These per-badge
+   heights were picked by eye so the two read as one visual weight. */
+.store-buttons .app-store-badge {
+  height: 58px;
+}
+
+.store-buttons .google-play-badge {
+  height: 50px;
+}
+
 
 .review-stars {
   display: inline-flex;
@@ -2164,13 +2176,18 @@ select:focus-visible {
 }
 
 .proof-grid > span > span {
-  display: grid;
+  display: block;
+  white-space: nowrap;
 }
 
 .proof-grid b {
   color: var(--navy);
   font-size: 13px;
   line-height: 1.35;
+}
+
+.proof-grid b::after {
+  content: " ";
 }
 
 .hero-calculator-shell {
@@ -4699,6 +4716,12 @@ select:focus-visible {
 
   .proof-grid b {
     font-size: 10px;
+  }
+
+  /* At this width there is not enough room to keep title and detail on one
+     line without overlapping the next column, so let it wrap again. */
+  .proof-grid > span > span {
+    white-space: normal;
   }
 
   .hero-calculator-shell {
