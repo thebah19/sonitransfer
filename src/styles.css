@@ -2175,19 +2175,10 @@ select:focus-visible {
   color: var(--orange);
 }
 
-.proof-grid > span > span {
-  display: block;
-  white-space: nowrap;
-}
-
 .proof-grid b {
   color: var(--navy);
   font-size: 13px;
   line-height: 1.35;
-}
-
-.proof-grid b::after {
-  content: " ";
 }
 
 .hero-calculator-shell {
@@ -4718,11 +4709,7 @@ select:focus-visible {
     font-size: 10px;
   }
 
-  /* At this width there is not enough room to keep title and detail on one
-     line without overlapping the next column, so let it wrap again. */
-  .proof-grid > span > span {
-    white-space: normal;
-  }
+
 
   .hero-calculator-shell {
     max-width: none;

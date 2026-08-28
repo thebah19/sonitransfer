@@ -56,12 +56,7 @@ export const en = {
     title: "Send money across Africa with confidence.",
     subtitle: "Fast, secure and reliable transfers.",
     proofLabel: "Why send with Soni Transfer",
-    proof: [
-      ["Secure", "transfers"],
-      ["Competitive", "exchange rates"],
-      ["FCA registered", "Small Payment Institution"],
-      ["Multiple", "payout options"],
-    ],
+    proof: ["Secure", "Competitive", "FCA registered", "Multiple Payouts"],
   },
 
   steps: {

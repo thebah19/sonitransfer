@@ -56,12 +56,7 @@ export const es = {
     title: "Envía dinero a toda África con confianza.",
     subtitle: "Transferencias rápidas, seguras y fiables.",
     proofLabel: "Por qué enviar con Soni Transfer",
-    proof: [
-      ["Transferencias", "seguras"],
-      ["Tipos de cambio", "competitivos"],
-      ["Registrado en la FCA", "Small Payment Institution"],
-      ["Varios", "métodos de pago"],
-    ],
+    proof: ["Transferencias seguras", "Tipos competitivos", "Registrado en la FCA", "Varios métodos de pago"],
   },
 
   steps: {

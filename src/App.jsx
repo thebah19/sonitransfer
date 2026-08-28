@@ -759,12 +759,12 @@ function HomePage() {
           <h1>{copy.hero.title}</h1>
           <p>{copy.hero.subtitle}</p>
           <div className="proof-grid" aria-label={copy.hero.proofLabel}>
-            {copy.hero.proof.map(([title, detail], index) => {
+            {copy.hero.proof.map((title, index) => {
               const Icon = proofIcons[index] ?? ShieldCheck;
               return (
                 <span key={title}>
                   <Icon size={20} weight="bold" aria-hidden="true" />
-                  <span><b>{title}</b>{detail}</span>
+                  <b>{title}</b>
                 </span>
               );
             })}
