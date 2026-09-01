@@ -192,6 +192,34 @@ export const es = {
       ],
       gallery: ["Soni Transfer entregando un premio en un campeonato de fútbol comunitario"],
     },
+    "wakefield-community-meeting-2025": {
+      title: "Soni Transfer se reúne con la comunidad de Wakefield",
+      date: "9 de noviembre de 2025",
+      alt: "Soni Transfer hablando con clientes y la comunidad en Wakefield",
+      summary:
+        "Soni Transfer celebró su primera reunión de encuentro con clientes en Wakefield, reuniendo a clientes y miembros de la comunidad local para una conversación abierta.",
+      paragraphs: [
+        "Soni Transfer celebró recientemente su primera reunión de encuentro con clientes en Wakefield, reuniendo a clientes y miembros de la comunidad local para una conversación abierta y sincera.",
+        "El encuentro puso de relieve el papel fundamental que desempeñan las remesas en Gambia, apoyando a las familias, la educación, los negocios y el desarrollo comunitario en general.",
+        "También hablamos de la importancia de fortalecer nuestras comunidades aquí, en la diáspora, creando mejores redes de apoyo, oportunidades y vínculos más sólidos.",
+        "Queremos dar las gracias a todas las personas que asistieron, participaron y compartieron su punto de vista. En Soni Transfer creemos que el progreso es más sólido cuando avanzamos juntos, en casa y en el extranjero.",
+      ],
+      gallery: ["Clientes y miembros de la comunidad en la reunión de encuentro de Wakefield"],
+    },
+    "bristol-community-meeting-2026": {
+      title: "Soni Transfer se reúne con la comunidad de Bristol",
+      date: "18 de abril de 2026",
+      alt: "Soni Transfer con clientes y la comunidad en Bristol",
+      summary:
+        "Soni Transfer pasó tiempo en Bristol junto a sus clientes y la comunidad en general, escuchando sus experiencias y fortaleciendo las relaciones.",
+      paragraphs: [
+        "Soni Transfer pasó recientemente tiempo en Bristol junto a nuestros clientes y la comunidad en general, escuchando sus experiencias, entendiendo sus necesidades y fortaleciendo nuestras relaciones.",
+        "El encuentro con la comunidad es una parte fundamental de nuestro crecimiento. Al escuchar directamente a las personas a las que servimos, podemos seguir mejorando nuestros servicios y, al mismo tiempo, fortalecer los vínculos entre las comunidades de la diáspora y sus seres queridos en casa.",
+        "Un gran agradecimiento a todas las personas que se unieron a nosotros, compartieron su punto de vista y contribuyeron a la conversación.",
+        "Juntos, estamos construyendo un Soni Transfer más fuerte, dado forma por las comunidades a las que servimos.",
+      ],
+      gallery: ["Soni Transfer presentándose ante clientes y la comunidad en Bristol"],
+    },
   },
 
   storyPage: {

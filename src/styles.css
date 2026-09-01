@@ -954,21 +954,10 @@ select:focus-visible {
 }
 
 .store-buttons img {
+  width: 168px;
   height: 52px;
-  width: auto;
   display: block;
-}
-
-/* The official badges have different internal padding around their glyph
-   and wordmark, so equal SVG height reads as unequal size: Google's badge
-   is visually larger than Apple's at the same 52px. These per-badge
-   heights were picked by eye so the two read as one visual weight. */
-.store-buttons .app-store-badge {
-  height: 58px;
-}
-
-.store-buttons .google-play-badge {
-  height: 50px;
+  object-fit: contain;
 }
 
 
