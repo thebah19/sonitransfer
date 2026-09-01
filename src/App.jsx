@@ -271,7 +271,7 @@ export const storyAssets = [
   {
     slug: "agera-football-championship-2023",
     image: "/assets/community/csr/agera-football-2023.jpg",
-    gallery: ["/assets/community/csr/agera-gallery-1.jpg", "/assets/community/csr/agera-gallery-2.jpg"],
+    gallery: ["/assets/community/csr/agera-gallery-1.jpg"],
   },
   {
     slug: "soninkara-family-fun-day-2024",
