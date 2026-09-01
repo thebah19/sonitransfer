@@ -54,7 +54,6 @@ export const en = {
   hero: {
     kicker: "Send money to Africa",
     title: "Send money home with confidence.",
-    subtitle: "Fast, secure and reliable transfers.",
     proofLabel: "Why send with Soni Transfer",
     proof: ["Secure", "Competitive", "FCA registered", "Multiple Payouts"],
   },
@@ -107,6 +106,7 @@ export const en = {
     ],
     corridorsLabel: "Where we send to",
     corridorsRoute: "From the United Kingdom to",
+    corridorsFooter: "More corridors launching soon.",
     live: "Live",
     comingSoon: "Coming soon",
     corridors: [
