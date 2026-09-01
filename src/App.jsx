@@ -287,6 +287,16 @@ export const storyAssets = [
     image: "/assets/community/csr/celebrating-community.jpg",
     gallery: ["/assets/community/csr/community-gallery-1.jpg"],
   },
+  {
+    slug: "wakefield-community-meeting-2025",
+    image: "/assets/community/csr/wakefield-community-meeting-2025.jpg",
+    gallery: ["/assets/community/csr/wakefield-gallery-1.jpg"],
+  },
+  {
+    slug: "bristol-community-meeting-2026",
+    image: "/assets/community/csr/bristol-community-meeting-2026.jpg",
+    gallery: ["/assets/community/csr/bristol-gallery-1.jpg"],
+  },
 ];
 
 function CommunityPreview({ onCommunityPage = false }) {

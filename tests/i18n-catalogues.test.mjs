@@ -99,7 +99,7 @@ for (const [locale, catalogue] of Object.entries(translations)) {
 
 test("every locale describes the same CSR stories", () => {
   const slugs = Object.keys(en.stories).sort();
-  assert.equal(slugs.length, 3);
+  assert.equal(slugs.length, 5);
 
   for (const [locale, catalogue] of Object.entries(translations)) {
     assert.deepEqual(Object.keys(catalogue.stories).sort(), slugs, `${locale} story slugs differ`);

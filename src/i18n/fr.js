@@ -192,6 +192,34 @@ export const fr = {
       ],
       gallery: ["Soni Transfer remettant un trophée lors d’un championnat de football communautaire"],
     },
+    "wakefield-community-meeting-2025": {
+      title: "Soni Transfer à la rencontre de la communauté de Wakefield",
+      date: "9 novembre 2025",
+      alt: "Soni Transfer s’adressant aux clients et à la communauté à Wakefield",
+      summary:
+        "Soni Transfer a organisé sa première réunion d’échange avec les clients à Wakefield, réunissant clients et membres de la communauté locale pour un échange ouvert.",
+      paragraphs: [
+        "Soni Transfer a récemment organisé sa première réunion d’échange avec les clients à Wakefield, réunissant clients et membres de la communauté locale pour un échange ouvert et sincère.",
+        "Cet événement a mis en lumière le rôle essentiel des transferts d’argent en Gambie, au service des familles, de l’éducation, des entreprises et du développement de la communauté au sens large.",
+        "Nous avons également évoqué l’importance de renforcer nos communautés ici, dans la diaspora — en créant de meilleurs réseaux de soutien, davantage d’opportunités et des liens plus forts.",
+        "Nous remercions toutes les personnes présentes, qui ont contribué et partagé leur point de vue. Chez Soni Transfer, nous croyons que le progrès est plus fort lorsque nous avançons ensemble — au pays comme dans la diaspora.",
+      ],
+      gallery: ["Clients et membres de la communauté lors de la réunion d’échange à Wakefield"],
+    },
+    "bristol-community-meeting-2026": {
+      title: "Soni Transfer à la rencontre de la communauté de Bristol",
+      date: "18 avril 2026",
+      alt: "Soni Transfer à la rencontre des clients et de la communauté à Bristol",
+      summary:
+        "Soni Transfer a passé du temps à Bristol à la rencontre de ses clients et de la communauté au sens large, à l’écoute de leurs expériences et pour renforcer les liens.",
+      paragraphs: [
+        "Soni Transfer a récemment passé du temps à Bristol à la rencontre de nos clients et de la communauté au sens large, à l’écoute de leurs expériences, pour mieux comprendre leurs besoins et renforcer nos liens.",
+        "L’échange avec la communauté est un élément essentiel de notre développement. En écoutant directement les personnes que nous servons, nous continuons d’améliorer nos services tout en renforçant les liens entre les communautés de la diaspora et leurs proches restés au pays.",
+        "Un grand merci à toutes les personnes qui nous ont rejoints, qui ont partagé leur point de vue et contribué à l’échange.",
+        "Ensemble, nous construisons un Soni Transfer plus fort — façonné par les communautés que nous servons.",
+      ],
+      gallery: ["Soni Transfer s’adressant aux clients et à la communauté à Bristol"],
+    },
   },
 
   storyPage: {

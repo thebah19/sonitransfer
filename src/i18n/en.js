@@ -190,6 +190,34 @@ export const en = {
       ],
       gallery: ["Soni Transfer presenting an award at a community football championship"],
     },
+    "wakefield-community-meeting-2025": {
+      title: "Soni Transfer Connects with the Wakefield Community",
+      date: "9 November 2025",
+      alt: "Soni Transfer speaking to customers and community members in Wakefield",
+      summary:
+        "Soni Transfer held its first Customer Community Engagement Meeting in Wakefield, bringing together customers and the local community for an open conversation.",
+      paragraphs: [
+        "Soni Transfer recently held its first Customer Community Engagement Meeting in Wakefield, bringing together customers and members of the local community for an open and meaningful conversation.",
+        "The event highlighted the important role remittances play in The Gambia, supporting families, education, businesses and wider community development.",
+        "We also discussed the importance of strengthening our communities here in the diaspora—creating better support networks, opportunities and stronger connections.",
+        "We would like to thank everyone who attended, contributed and shared their views. At Soni Transfer, we believe progress is strongest when we move forward together—at home and abroad.",
+      ],
+      gallery: ["Customers and community members at the Wakefield engagement meeting"],
+    },
+    "bristol-community-meeting-2026": {
+      title: "Soni Transfer Connects with the Bristol Community",
+      date: "18 April 2026",
+      alt: "Soni Transfer meeting customers and the community in Bristol",
+      summary:
+        "Soni Transfer spent time in Bristol connecting with customers and the wider community, listening to their experiences and strengthening relationships.",
+      paragraphs: [
+        "Soni Transfer recently spent time in Bristol connecting with our customers and the wider community, listening to their experiences, understanding their needs and strengthening relationships.",
+        "Community engagement is an important part of how we grow. By listening directly to the people we serve, we can continue improving our services while strengthening the connections between diaspora communities and their loved ones back home.",
+        "A big thank you to everyone who joined us, shared their views and contributed to the conversation.",
+        "Together, we're building a stronger Soni Transfer—shaped by the communities we serve.",
+      ],
+      gallery: ["Soni Transfer presenting to customers and the community in Bristol"],
+    },
   },
 
   storyPage: {
