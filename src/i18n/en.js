@@ -147,7 +147,7 @@ export const en = {
     "agera-football-championship-2023": {
       title: "Soni Transfer Proudly Sponsors 2023 Gambian AGERA July 4th Football Championship in Atlanta",
       date: "10 July 2023",
-      alt: "AGERA July 4th football championship community activities",
+      alt: "Trophies presented to the winning team at the AGERA July 4th football championship",
       summary:
         "Soni Transfer was honoured to sponsor the annual AGERA July 4th football championship, celebrating Gambian culture and community in Atlanta.",
       paragraphs: [
@@ -156,10 +156,7 @@ export const en = {
         "The 2023 final was an edge-of-your-seat match between Washington DC and the host Georgia, with DC prevailing in a penalty shootout after the match was tied at the end of extra time. The championship was a feast for the senses, with Gambian businesses showcasing their wares, food stalls serving Gambian and American dishes, and games and entertainment for children of all ages.",
         "The championship was a huge success, and Soni Transfer was proud to be a part of it. We look forward to continuing to support events that celebrate the community in Atlanta.",
       ],
-      gallery: [
-        "Community members competing in a tug-of-war event",
-        "Soni Transfer presenting an award at the community event",
-      ],
+      gallery: ["Soni Transfer banner carried onto the pitch at the AGERA July 4th football championship"],
     },
     "soninkara-family-fun-day-2024": {
       title: "Soni Transfer supports Soninkara Family Fun Day 2024",
