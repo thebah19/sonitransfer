@@ -54,7 +54,6 @@ export const fr = {
   hero: {
     kicker: "Envoyer de l’argent en Afrique",
     title: "Envoyez de l’argent au pays en toute confiance.",
-    subtitle: "Des transferts rapides, sûrs et fiables.",
     proofLabel: "Pourquoi envoyer avec Soni Transfer",
     proof: ["Transferts sécurisés", "Taux compétitifs", "Enregistré auprès de la FCA", "Plusieurs modes de paiement"],
   },
@@ -109,6 +108,7 @@ export const fr = {
     ],
     corridorsLabel: "Où nous envoyons",
     corridorsRoute: "Depuis le Royaume-Uni vers",
+    corridorsFooter: "D’autres pays seront bientôt disponibles.",
     live: "En service",
     comingSoon: "Bientôt disponible",
     corridors: [

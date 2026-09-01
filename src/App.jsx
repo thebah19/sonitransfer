@@ -251,6 +251,7 @@ function ReceiveMethods({ portrait = false, minimal = false }) {
                 </li>
               ))}
             </ul>
+            <p className="corridor-showcase-footer">{copy.receive.corridorsFooter}</p>
           </figure>
         )}
       </div>
@@ -769,7 +770,6 @@ function HomePage() {
         <div className="hero-copy">
           <p className="hero-kicker"><span aria-hidden="true" /> {copy.hero.kicker}</p>
           <h1>{copy.hero.title}</h1>
-          <p>{copy.hero.subtitle}</p>
           <div className="proof-grid" aria-label={copy.hero.proofLabel}>
             {copy.hero.proof.map((title, index) => {
               const Icon = proofIcons[index] ?? ShieldCheck;
