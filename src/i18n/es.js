@@ -53,7 +53,7 @@ export const es = {
 
   hero: {
     kicker: "Enviar dinero a África",
-    title: "Envía dinero a toda África con confianza.",
+    title: "Envía dinero a casa con confianza.",
     subtitle: "Transferencias rápidas, seguras y fiables.",
     proofLabel: "Por qué enviar con Soni Transfer",
     proof: ["Transferencias seguras", "Tipos competitivos", "Registrado en la FCA", "Varios métodos de pago"],
@@ -65,22 +65,21 @@ export const es = {
     intro:
       "Sigue el recorrido en la aplicación Soni Transfer: desde introducir el importe hasta elegir cómo pagar.",
     tablist: "Pasos de la transferencia",
-    stageLabel: "Dentro de la aplicación Soni Transfer",
     stepWord: "Paso",
     items: [
       {
         title: "Introduce los datos de la transferencia",
-        body: "Elige cuánto quieres enviar y comprueba el importe exacto que recibirá tu destinatario.",
+        body: "Elige cuánto quieres enviar.",
         alt: "La aplicación Soni Transfer mostrando los importes enviado y recibido, el tipo de cambio y la comisión",
       },
       {
-        title: "Método de pago",
-        body: "Elige el método de pago disponible que mejor le venga a tu destinatario.",
+        title: "Elige el método de pago",
+        body: "Selecciona cómo recibirá el dinero tu destinatario.",
         alt: "La aplicación Soni Transfer mostrando recogida en efectivo, depósito bancario y monedero móvil",
       },
       {
         title: "Paga de forma segura",
-        body: "Selecciona un medio de pago admitido, revisa la transferencia y continúa de forma segura.",
+        body: "Elige tu método de pago y completa tu transferencia.",
         alt: "La aplicación Soni Transfer mostrando el pago con aplicación bancaria y con tarjeta de débito",
       },
     ],
@@ -101,19 +100,22 @@ export const es = {
     title: "Formas de recibir dinero",
     intro:
       "Elige el método de pago que mejor le venga a tu destinatario. Las opciones disponibles varían según el país de destino.",
-    showcaseLabel: "Método de pago",
-    send: "Envío",
-    receiveWord: "Recepción",
-    phoneAlt:
-      "La aplicación Soni Transfer mostrando el importe enviado, el importe recibido, el tipo de cambio y el método de pago",
-    chooseTitle: "Elige en la aplicación",
-    chooseBody: "Los métodos de pago disponibles cambian según el país de destino.",
     methods: [
       { title: "Recogida en efectivo", body: "Retira efectivo en un socio de pago disponible." },
       { title: "Depósito bancario", body: "Envía dinero directamente a una cuenta bancaria admitida." },
       { title: "Wave - Monedero móvil", body: "Envía dinero directamente a un monedero móvil Wave." },
       { title: "Cash Power", body: "Recarga un contador de electricidad de prepago en casa." },
       { title: "Crédito móvil", body: "Recarga el saldo de un número de móvil admitido." },
+    ],
+    corridorsLabel: "A dónde enviamos",
+    corridorsRoute: "Desde el Reino Unido a",
+    live: "Activo",
+    comingSoon: "Próximamente",
+    corridors: [
+      { country: "Gambia", flag: "GM", status: "live", currency: "GMD" },
+      { country: "Senegal", flag: "SN", status: "soon" },
+      { country: "Ghana", flag: "GH", status: "soon" },
+      { country: "Nigeria", flag: "NG", status: "soon" },
     ],
   },
 

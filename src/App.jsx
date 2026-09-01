@@ -32,6 +32,12 @@ import { customerReviews, GOOGLE_REVIEWS_URL } from "./reviews";
 import { catalogueFor, I18nProvider, parsePath, useCopy, useDocumentHead, useI18n } from "./i18n";
 
 const assetUrl = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+
+function flagEmoji(countryCode) {
+  const code = String(countryCode ?? "").toUpperCase();
+  if (!/^[A-Z]{2}$/.test(code)) return "";
+  return String.fromCodePoint(...[...code].map((letter) => 127397 + letter.charCodeAt(0)));
+}
 const APP_LOGIN_URL = "https://app.sonitransfer.com/#/ext/login/en-GB";
 const OFFICE_ADDRESS = "9 Waterloo Road, Smethwick, Birmingham, B66 4JX, UK";
 const OFFICE_MAP_URL =
@@ -168,7 +174,6 @@ function Steps() {
           role="tabpanel"
           aria-labelledby={`transfer-step-${activeStep + 1}`}
         >
-          <span className="app-journey-label">{copy.steps.stageLabel}</span>
           <img key={stepImages[activeStep]} src={assetUrl(stepImages[activeStep])} alt={selectedStep.alt} />
           <p><b>{copy.steps.stepWord} {activeStep + 1}</b>{selectedStep.title}</p>
         </div>
@@ -227,18 +232,25 @@ function ReceiveMethods({ portrait = false, minimal = false }) {
           })}
         </div>
         {portrait && (
-          <figure className="payout-showcase">
-            <span className="payout-showcase-label">{copy.receive.showcaseLabel}</span>
-            <span className="payout-showcase-route" aria-hidden="true">
-              {copy.receive.send} <ArrowRight size={15} weight="bold" /> {copy.receive.receiveWord}
-            </span>
-            <span className="payout-showcase-phone-frame">
-              <img src={assetUrl("/assets/app-mockups/send-money-screen-angled.png")} alt={copy.receive.phoneAlt} />
-            </span>
-            <figcaption>
-              <CheckCircle size={20} weight="fill" aria-hidden="true" />
-              <span><b>{copy.receive.chooseTitle}</b>{copy.receive.chooseBody}</span>
-            </figcaption>
+          <figure className="corridor-showcase">
+            <span className="corridor-showcase-label">{copy.receive.corridorsLabel}</span>
+            <span className="corridor-showcase-route" aria-hidden="true">{copy.receive.corridorsRoute}</span>
+            <ul className="corridor-list">
+              {copy.receive.corridors.map((corridor) => (
+                <li key={corridor.country} className={`corridor-${corridor.status}`}>
+                  <span className="corridor-flag" aria-hidden="true">{flagEmoji(corridor.flag)}</span>
+                  <span className="corridor-name">{corridor.country}</span>
+                  {corridor.status === "live" ? (
+                    <span className="corridor-status corridor-status-live">
+                      <CheckCircle size={13} weight="fill" aria-hidden="true" /> {copy.receive.live}
+                    </span>
+                  ) : (
+                    <span className="corridor-status corridor-status-soon">{copy.receive.comingSoon}</span>
+                  )}
+                  {corridor.currency ? <span className="corridor-currency">{corridor.currency}</span> : null}
+                </li>
+              ))}
+            </ul>
           </figure>
         )}
       </div>
