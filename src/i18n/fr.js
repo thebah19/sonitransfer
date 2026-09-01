@@ -53,7 +53,7 @@ export const fr = {
 
   hero: {
     kicker: "Envoyer de l’argent en Afrique",
-    title: "Envoyez de l’argent partout en Afrique en toute confiance.",
+    title: "Envoyez de l’argent au pays en toute confiance.",
     subtitle: "Des transferts rapides, sûrs et fiables.",
     proofLabel: "Pourquoi envoyer avec Soni Transfer",
     proof: ["Transferts sécurisés", "Taux compétitifs", "Enregistré auprès de la FCA", "Plusieurs modes de paiement"],
@@ -65,22 +65,21 @@ export const fr = {
     intro:
       "Suivez le parcours dans l’application Soni Transfer : du montant à saisir jusqu’au choix du mode de paiement.",
     tablist: "Étapes du transfert",
-    stageLabel: "Dans l’application Soni Transfer",
     stepWord: "Étape",
     items: [
       {
         title: "Saisissez les détails du transfert",
-        body: "Choisissez le montant à envoyer et voyez exactement ce que votre bénéficiaire recevra.",
+        body: "Choisissez le montant à envoyer.",
         alt: "L’application Soni Transfer affichant les montants envoyé et reçu, le taux de change et les frais",
       },
       {
-        title: "Mode de réception",
-        body: "Choisissez le mode de réception disponible qui convient le mieux à votre bénéficiaire.",
+        title: "Choisissez le mode de réception",
+        body: "Sélectionnez comment votre bénéficiaire recevra l’argent.",
         alt: "L’application Soni Transfer affichant le retrait en espèces, le dépôt bancaire et le portefeuille mobile",
       },
       {
         title: "Payez en toute sécurité",
-        body: "Sélectionnez un moyen de paiement pris en charge, vérifiez le transfert et poursuivez en toute sécurité.",
+        body: "Choisissez votre moyen de paiement et finalisez votre transfert.",
         alt: "L’application Soni Transfer affichant le paiement par application bancaire et par carte de débit",
       },
     ],
@@ -101,19 +100,22 @@ export const fr = {
     title: "Comment recevoir l’argent",
     intro:
       "Choisissez le mode de réception qui convient le mieux à votre bénéficiaire. Les options disponibles varient selon le pays de destination.",
-    showcaseLabel: "Mode de réception",
-    send: "Envoi",
-    receiveWord: "Réception",
-    phoneAlt:
-      "L’application Soni Transfer affichant le montant envoyé, le montant reçu, le taux de change et le mode de réception",
-    chooseTitle: "Choisissez dans l’application",
-    chooseBody: "Les modes de réception disponibles changent selon le pays de destination.",
     methods: [
       { title: "Retrait en espèces", body: "Retirez des espèces chez un partenaire de paiement disponible." },
       { title: "Dépôt bancaire", body: "Envoyez de l’argent directement sur un compte bancaire pris en charge." },
       { title: "Wave - Portefeuille mobile", body: "Envoyez de l’argent directement sur un portefeuille mobile Wave." },
       { title: "Cash Power", body: "Rechargez un compteur d’électricité prépayé à la maison." },
       { title: "Crédit mobile", body: "Rechargez le crédit d’un numéro de mobile pris en charge." },
+    ],
+    corridorsLabel: "Où nous envoyons",
+    corridorsRoute: "Depuis le Royaume-Uni vers",
+    live: "En service",
+    comingSoon: "Bientôt disponible",
+    corridors: [
+      { country: "Gambie", flag: "GM", status: "live", currency: "GMD" },
+      { country: "Sénégal", flag: "SN", status: "soon" },
+      { country: "Ghana", flag: "GH", status: "soon" },
+      { country: "Nigeria", flag: "NG", status: "soon" },
     ],
   },
 
