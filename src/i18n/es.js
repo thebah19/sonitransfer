@@ -333,19 +333,19 @@ export const es = {
     ],
     initiatives: [
       {
-        title: "Juventud y educación",
+        title: "Un día para todos",
         body:
-          "Apoyamos iniciativas escolares, material didáctico y programas que ayudan a prosperar a los jóvenes de nuestra comunidad.",
+          "De los niños a los adultos, el Family Fun Day reúne a todas las generaciones en un mismo lugar.",
       },
       {
-        title: "Alianzas locales",
+        title: "Mucho más que juegos",
         body:
-          "Trabajamos con asociaciones, eventos culturales y colectivos que importan a la diáspora.",
+          "Fútbol, comida y actividades dan a todos un motivo para encontrarse, reír y disfrutar juntos del día.",
       },
       {
-        title: "Devolver en casa",
+        title: "Pensado para nuestra comunidad",
         body:
-          "Apoyamos proyectos de base en las comunidades que importan a nuestros clientes, en todos los destinos a los que servimos.",
+          "Un día para celebrar a las personas, familias y comunidades que forman parte de la historia de Soni Transfer.",
       },
     ],
     ctaEyebrow: "Sigamos en contacto",
