@@ -2539,7 +2539,7 @@ select:focus-visible {
 .connection-story {
   width: min(100% - 64px, 1280px);
   height: 500px;
-  margin: 88px auto 0;
+  margin: 88px auto;
   overflow: hidden;
   position: relative;
   isolation: isolate;
@@ -4558,6 +4558,7 @@ select:focus-visible {
     width: min(100% - 48px, 760px);
     height: 480px;
     margin-top: 72px;
+    margin-bottom: 72px;
   }
 
   .connection-story-copy {
@@ -4881,6 +4882,7 @@ select:focus-visible {
     width: calc(100% - 40px);
     height: 580px;
     margin-top: 64px;
+    margin-bottom: 64px;
     border-radius: 22px;
   }
 
