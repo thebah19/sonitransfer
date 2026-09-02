@@ -112,7 +112,7 @@ export const es = {
     live: "Activo",
     comingSoon: "Próximamente",
     corridors: [
-      { country: "Gambia", flag: "GM", status: "live", currency: "GMD" },
+      { country: "Gambia", flag: "GM", status: "live" },
       { country: "Senegal", flag: "SN", status: "soon" },
       { country: "Ghana", flag: "GH", status: "soon" },
       { country: "Nigeria", flag: "NG", status: "soon" },
