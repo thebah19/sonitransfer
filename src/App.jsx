@@ -247,7 +247,6 @@ function ReceiveMethods({ portrait = false, minimal = false }) {
                   ) : (
                     <span className="corridor-status corridor-status-soon">{copy.receive.comingSoon}</span>
                   )}
-                  {corridor.currency ? <span className="corridor-currency">{corridor.currency}</span> : null}
                 </li>
               ))}
             </ul>

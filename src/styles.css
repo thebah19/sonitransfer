@@ -2822,22 +2822,9 @@ select:focus-visible {
   transition: background-color 180ms ease-out, border-color 180ms ease-out;
 }
 
-.corridor-soon {
-  padding-block: 4px;
-}
-
-.corridor-soon + .corridor-soon {
+.corridor-list li + li {
   border-top: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 0;
-}
-
-.corridor-live {
-  min-height: 76px;
-  padding: 0 20px;
-  grid-template-columns: 46px 1fr auto;
-  border-color: rgba(255, 255, 255, 0.22);
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
-  box-shadow: 0 10px 26px rgba(8, 16, 46, 0.28);
 }
 
 .corridor-flag {
@@ -2846,18 +2833,10 @@ select:focus-visible {
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15));
 }
 
-.corridor-live .corridor-flag {
-  font-size: 28px;
-}
-
 .corridor-name {
   color: #fff;
   font-size: 16px;
   font-weight: 700;
-}
-
-.corridor-live .corridor-name {
-  font-size: 18px;
 }
 
 .corridor-soon .corridor-name {
@@ -2889,21 +2868,6 @@ select:focus-visible {
   color: rgba(255, 255, 255, 0.6);
   font-weight: 600;
   letter-spacing: 0.02em;
-}
-
-.corridor-currency {
-  grid-column: 3;
-  margin-top: 5px;
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  text-align: right;
-}
-
-.corridor-live {
-  grid-template-rows: auto auto;
-  row-gap: 2px;
 }
 
 .corridor-showcase-footer {
