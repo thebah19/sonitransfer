@@ -270,11 +270,13 @@ const communityMomentImages = [
 export const storyAssets = [
   {
     slug: "agera-football-championship-2023",
+    date: "2023-07-10",
     image: "/assets/community/csr/agera-football-2023.jpg",
     gallery: ["/assets/community/csr/agera-gallery-1.jpg"],
   },
   {
     slug: "soninkara-family-fun-day-2024",
+    date: "2024-09-01",
     image: "/assets/community/csr/soninkara-family-fun-day-2024.jpg",
     gallery: [
       "/assets/community/csr/soninkara-gallery-1.jpg",
@@ -284,23 +286,32 @@ export const storyAssets = [
   },
   {
     slug: "celebrating-with-our-community",
+    date: "2023-09-15",
     image: "/assets/community/csr/celebrating-community.jpg",
     gallery: ["/assets/community/csr/community-gallery-1.jpg"],
   },
   {
     slug: "wakefield-community-meeting-2025",
+    date: "2025-11-09",
     image: "/assets/community/csr/wakefield-community-meeting-2025.jpg",
     gallery: ["/assets/community/csr/wakefield-gallery-1.jpg"],
   },
   {
     slug: "bristol-community-meeting-2026",
+    date: "2026-04-18",
     image: "/assets/community/csr/bristol-community-meeting-2026.jpg",
     gallery: ["/assets/community/csr/bristol-gallery-1.jpg"],
   },
 ];
 
+const HOMEPAGE_STORY_COUNT = 3;
+
 function CommunityPreview({ onCommunityPage = false }) {
   const { copy, href } = useI18n();
+  // Newest first, everywhere; the homepage additionally shows only the most
+  // recent HOMEPAGE_STORY_COUNT. /community keeps the full list.
+  const sortedAssets = [...storyAssets].sort((a, b) => (a.date < b.date ? 1 : -1));
+  const visibleAssets = onCommunityPage ? sortedAssets : sortedAssets.slice(0, HOMEPAGE_STORY_COUNT);
 
   return (
     <section
@@ -313,7 +324,7 @@ function CommunityPreview({ onCommunityPage = false }) {
         <p className="section-intro">{onCommunityPage ? copy.csr.pageIntro : copy.csr.homeIntro}</p>
       </div>
       <div className="csr-story-grid">
-        {storyAssets.map((asset) => {
+        {visibleAssets.map((asset) => {
           const story = copy.stories[asset.slug];
           const storyHref = href(`community-story/${asset.slug}`);
           return (
