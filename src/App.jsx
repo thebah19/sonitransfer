@@ -7,11 +7,10 @@ import {
   CaretRight,
   Check,
   CheckCircle,
+  Confetti,
   CurrencyGbp,
   DeviceMobile,
   EnvelopeSimple,
-  GraduationCap,
-  Handshake,
   Heart,
   Lightning,
   MapPin,
@@ -19,6 +18,7 @@ import {
   Phone,
   PhoneCall,
   ShieldCheck,
+  SoccerBall,
   Star,
   UsersThree,
   Wallet,
@@ -524,7 +524,7 @@ function OurStorySection() {
   );
 }
 
-const initiativeIcons = [GraduationCap, Handshake, Heart];
+const initiativeIcons = [Confetti, SoccerBall, Heart];
 
 function CommunityPage() {
   const { copy, href } = useI18n();

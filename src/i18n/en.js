@@ -322,16 +322,16 @@ export const en = {
     ],
     initiatives: [
       {
-        title: "Youth & education",
-        body: "We support school initiatives, learning materials and programmes that help young people in our community thrive.",
+        title: "A day for everyone",
+        body: "From children to adults, Family Fun Day brings different generations together in one place.",
       },
       {
-        title: "Local partnerships",
-        body: "We work with community organisations, cultural events and groups that matter to the diaspora.",
+        title: "More than games",
+        body: "Football, food and activities give people a reason to meet, laugh and enjoy the day together.",
       },
       {
-        title: "Giving back at home",
-        body: "We support grassroots projects in the communities our customers care about across every destination we serve.",
+        title: "Made for our community",
+        body: "A day to celebrate the people, families and communities that have been part of Soni Transfer’s journey.",
       },
     ],
     ctaEyebrow: "Stay connected",
