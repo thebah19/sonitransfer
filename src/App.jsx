@@ -5,7 +5,6 @@ import {
   Bank,
   CaretLeft,
   CaretRight,
-  Check,
   CheckCircle,
   Confetti,
   CurrencyGbp,
@@ -355,6 +354,8 @@ function CommunityPreview({ onCommunityPage = false }) {
   );
 }
 
+const proofIcons = [ShieldCheck, CurrencyGbp, CheckCircle, Money];
+
 function SupportBand() {
   const copy = useCopy();
   return (
@@ -365,11 +366,16 @@ function SupportBand() {
         <p>{copy.support.body}</p>
         <a href="mailto:support@sonitransfer.com">support@sonitransfer.com</a>
       </div>
-      <div className="security-list">
-        <h3><ShieldCheck size={25} /> {copy.support.safeTitle}</h3>
-        {copy.support.points.map((point) => (
-          <span key={point}><Check size={17} /> {point}</span>
-        ))}
+      <div className="support-proof" aria-label={copy.hero.proofLabel}>
+        {copy.hero.proof.map((title, index) => {
+          const Icon = proofIcons[index] ?? ShieldCheck;
+          return (
+            <span key={title}>
+              <Icon size={20} weight="bold" aria-hidden="true" />
+              <b>{title}</b>
+            </span>
+          );
+        })}
       </div>
     </section>
   );
@@ -778,8 +784,6 @@ function NotFoundPage() {
   );
 }
 
-const proofIcons = [ShieldCheck, CurrencyGbp, CheckCircle, Money];
-
 function HomePage() {
   const copy = useCopy();
 
@@ -788,19 +792,7 @@ function HomePage() {
       <Header />
       <section className="white-hero">
         <div className="hero-copy">
-          <p className="hero-kicker"><span aria-hidden="true" /> {copy.hero.kicker}</p>
           <h1>{copy.hero.title}</h1>
-          <div className="proof-grid" aria-label={copy.hero.proofLabel}>
-            {copy.hero.proof.map((title, index) => {
-              const Icon = proofIcons[index] ?? ShieldCheck;
-              return (
-                <span key={title}>
-                  <Icon size={20} weight="bold" aria-hidden="true" />
-                  <b>{title}</b>
-                </span>
-              );
-            })}
-          </div>
         </div>
         <div className="hero-calculator-shell">
           <LiveTransferCalculator variant="editorial" />

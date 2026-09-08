@@ -849,23 +849,29 @@ select:focus-visible {
   font-weight: 700;
 }
 
-.security-list {
+.support-proof {
   padding-left: 60px;
   border-left: 1px solid var(--line);
   display: grid;
+  grid-template-columns: 1fr 1fr;
   align-content: center;
-  gap: 13px;
+  gap: 22px 18px;
 }
 
-.security-list h3,
-.security-list span {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.support-proof span {
+  display: grid;
+  gap: 4px;
+  color: var(--gray);
+  font-size: 12px;
 }
 
-.security-list svg {
+.support-proof svg {
   color: var(--orange);
+}
+
+.support-proof b {
+  color: var(--navy);
+  font-size: 15px;
 }
 
 .app-download {
@@ -3776,8 +3782,7 @@ select:focus-visible {
   color: var(--navy);
 }
 
-.draft-two .support-band h2,
-.draft-two .security-list h3 {
+.draft-two .support-band h2 {
   color: var(--navy);
 }
 
@@ -3794,11 +3799,11 @@ select:focus-visible {
   text-underline-offset: 6px;
 }
 
-.draft-two .security-list {
+.draft-two .support-proof {
   border-left-color: rgba(23, 38, 83, 0.14);
 }
 
-.draft-two .security-list span {
+.draft-two .support-proof span {
   color: #4f596f;
 }
 
@@ -4207,7 +4212,7 @@ select:focus-visible {
     max-height: 400px;
   }
 
-  .security-list {
+  .support-proof {
     padding: 34px 0 0;
     border-left: 0;
     border-top: 1px solid var(--line);
