@@ -788,7 +788,6 @@ function HomePage() {
       <Header />
       <section className="white-hero">
         <div className="hero-copy">
-          <p className="hero-kicker"><span aria-hidden="true" /> {copy.hero.kicker}</p>
           <h1>{copy.hero.title}</h1>
           <div className="proof-grid" aria-label={copy.hero.proofLabel}>
             {copy.hero.proof.map((title, index) => {

@@ -52,7 +52,6 @@ export const en = {
   },
 
   hero: {
-    kicker: "Send money to Africa",
     title: "Send money home with confidence.",
     proofLabel: "Why send with Soni Transfer",
     proof: ["Secure", "Competitive", "FCA registered", "Multiple Payouts"],

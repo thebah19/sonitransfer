@@ -2077,26 +2077,6 @@ select:focus-visible {
   z-index: 1;
 }
 
-.hero-kicker {
-  margin: 0 0 24px !important;
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  color: var(--blue) !important;
-  font-size: 12px !important;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  line-height: 1 !important;
-  text-transform: uppercase;
-}
-
-.hero-kicker > span {
-  width: 34px;
-  height: 3px;
-  border-radius: 999px;
-  background: var(--orange);
-}
-
 .white-hero .hero-copy h1 {
   max-width: 610px;
   font-size: clamp(52px, 4.9vw, 70px);
@@ -2300,9 +2280,7 @@ select:focus-visible {
   font-size: 9px;
 }
 
-.hero-kicker,
 .white-hero .hero-copy h1,
-.white-hero .hero-copy > p:not(.hero-kicker),
 .proof-grid,
 .hero-calculator-shell {
   opacity: 0;
@@ -2310,7 +2288,6 @@ select:focus-visible {
 }
 
 .white-hero .hero-copy h1 { animation-delay: 80ms; }
-.white-hero .hero-copy > p:not(.hero-kicker) { animation-delay: 160ms; }
 .proof-grid { animation-delay: 240ms; }
 .hero-calculator-shell { animation-delay: 180ms; }
 
@@ -4677,16 +4654,6 @@ select:focus-visible {
 
   .white-hero::after {
     top: 47%;
-  }
-
-  .hero-kicker {
-    margin-bottom: 18px !important;
-    font-size: 10px !important;
-    letter-spacing: 0.08em;
-  }
-
-  .hero-kicker > span {
-    width: 24px;
   }
 
   .white-hero .hero-copy h1 {

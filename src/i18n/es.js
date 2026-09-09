@@ -52,7 +52,6 @@ export const es = {
   },
 
   hero: {
-    kicker: "Enviar dinero a África",
     title: "Envía dinero a casa con confianza.",
     proofLabel: "Por qué enviar con Soni Transfer",
     proof: ["Transferencias seguras", "Tipos competitivos", "Registrado en la FCA", "Varios métodos de pago"],
